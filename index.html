@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangladesh Professional Regulatory & Business Web Index</title>
+    <style>
+        /* =========================================================
+           STYLES - Bangladesh Professional Regulatory & Business Web Index
+           ========================================================= */
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --primary-dark: #1a202c;
+            --accent: #2b6cb0;
+            --accent-light: #3182ce;
+            --success: #276749;
+            --warning: #c05621;
+            --danger: #c53030;
+            --bg: #f7fafc;
+            --bg-card: #ffffff;
+            --bg-sidebar: #1a202c;
+            --text: #2d3748;
+            --text-light: #718096;
+            --text-muted: #a0aec0;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 4px 6px rgba(0,0,0,0.07), 0 10px 15px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --sidebar-width: 260px;
+            --header-height: 60px;
+            --transition: all 0.2s ease;
+        }
+        [data-theme="dark"] {
+            --primary: #63b3ed;
+            --primary-light: #90cdf4;
+            --primary-dark: #bee3f8;
+            --accent: #4299e1;
+            --accent-light: #63b3ed;
+            --bg: #1a202c;
+            --bg-card: #2d3748;
+            --bg-sidebar: #171923;
+            --text: #e2e8f0;
+            --text-light: #a0aec0;
+            --text-muted: #718096;
+            --border: #4a5568;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-lg: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        /* Header */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: var(--header-height);
+            background: var(--primary-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        [data-theme="dark"] .header { background: #171923; }
+        .header-brand {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 15px; font-weight: 700;
+            white-space: nowrap;
+        }
+        .header-brand .logo {
+            width: 32px; height: 32px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 900;
+        }
+        .header-search {
+            flex: 1; max-width: 500px; margin: 0 24px;
+            position: relative;
+        }
+        .header-search input {
+            width: 100%; padding: 8px 16px 8px 36px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+        .header-search input::placeholder { color: rgba(255,255,255,0.5); }
+        .header-search input:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--accent-light);
+        }
+        .header-search .search-icon {
+            position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+            color: rgba(255,255,255,0.5); font-size: 14px;
+        }
+        .header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+        .header-btn {
+            padding: 6px 12px; border: none; border-radius: 6px;
+            background: rgba(255,255,255,0.1); color: #fff;
+            font-size: 13px; cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .header-btn:hover { background: rgba(255,255,255,0.2); }
+        .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; padding: 8px; }
+        /* Sidebar */
+        .sidebar {
+            position: fixed; top: var(--header-height); left: 0; bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            overflow-y: auto;
+            z-index: 900;
+            transition: transform 0.3s ease;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        [data-theme="dark"] .sidebar { background: #171923; }
+        .sidebar-nav { padding: 12px 0; }
+        .sidebar-section { margin-bottom: 4px; }
+        .sidebar-section-title {
+            padding: 8px 16px 4px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.3);
+            font-weight: 700;
+        }
+        .sidebar-link {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 16px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border-left-color: var(--accent);
+        }
+        .sidebar-link .icon { width: 18px; text-align: center; font-size: 14px; }
+        .sidebar-link .badge {
+            margin-left: auto;
+            background: var(--accent);
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        /* Main Content */
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            padding: 24px;
+            min-height: calc(100vh - var(--header-height));
+        }
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .resource-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+        .resource-card .card-header {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .resource-card .card-title {
+            font-size: 14px; font-weight: 700; color: var(--text);
+            line-height: 1.3;
+        }
+        .resource-card .card-type {
+            font-size: 11px; color: var(--text-light);
+            margin-top: 2px;
+        }
+        .resource-card .card-desc {
+            font-size: 12px; color: var(--text-light);
+            margin: 8px 0;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .resource-card .card-tags {
+            display: flex; flex-wrap: wrap; gap: 4px;
+            margin: 8px 0;
+        }
+        .resource-card .tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: rgba(43,108,176,0.1);
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .resource-card .card-actions {
+            display: flex; align-items: center; gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .btn-open {
+            flex: 1;
+            padding: 7px 12px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        .btn-open:hover { background: var(--accent-light); }
+        .btn-fav {
+            padding: 7px 10px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .btn-fav:hover { border-color: #ecc94b; }
+        .btn-fav.active { color: #ecc94b; border-color: #ecc94b; }
+        /* Priority Badges */
+        .priority-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .priority-critical { background: #fed7d7; color: #c53030; }
+        .priority-high { background: #feebc8; color: #c05621; }
+        .priority-medium { background: #fefcbf; color: #975a16; }
+        .priority-reference { background: #bee3f8; color: #2b6cb0; }
+        [data-theme="dark"] .priority-critical { background: rgba(197,48,48,0.2); color: #fc8181; }
+        [data-theme="dark"] .priority-high { background: rgba(192,86,33,0.2); color: #fbd38d; }
+        [data-theme="dark"] .priority-medium { background: rgba(151,90,22,0.2); color: #fefcbf; }
+        [data-theme="dark"] .priority-reference { background: rgba(43,108,176,0.2); color: #90cdf4; }
+        /* Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+        /* Section Headers */
+        .section-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text);
+        }
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        /* Filters */
+        .filters-bar {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        .filter-select {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 12px;
+            cursor: pointer;
+            outline: none;
+        }
+        .filter-select:focus { border-color: var(--accent); }
+        .filter-chip {
+            padding: 5px 10px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 11px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-chip:hover, .filter-chip.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        /* Quick Access */
+        .quick-access {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .quick-item {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .quick-item:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
+        }
+        .quick-item .qi-icon {
+            width: 28px; height: 28px;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+            background: rgba(43,108,176,0.1);
+        }
+        /* Modal */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--bg-card);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .modal-close {
+            background: none; border: none; font-size: 24px;
+            cursor: pointer; color: var(--text-light); padding: 4px;
+        }
+        .modal-body { font-size: 14px; }
+        .modal-body .detail-row {
+            display: flex; padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .modal-body .detail-label {
+            width: 140px; font-weight: 600; color: var(--text-light);
+            font-size: 12px; text-transform: uppercase;
+        }
+        .modal-body .detail-value { flex: 1; font-size: 13px; }
+        /* Footer */
+        .footer {
+            margin-left: var(--sidebar-width);
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+        .footer p { margin: 4px 0; }
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+        .empty-state h3 { font-size: 18px; margin-bottom: 8px; color: var(--text); }
+        .empty-state p { font-size: 14px; }
+        /* Page sections */
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        /* What do you need */
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .task-item {
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .task-item:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
+        }
+        .task-item .task-icon { font-size: 24px; margin-bottom: 8px; }
+        .task-item .task-label { font-size: 13px; font-weight: 600; }
+        /* Role/Industry pills */
+        .pill-grid {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 16px;
+        }
+        .pill {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-card);
+            color: var(--text);
+        }
+        .pill:hover, .pill.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main, .footer { margin-left: 0; }
+            .menu-toggle { display: block; }
+            .header-brand span { display: none; }
+            .header-search { margin: 0 12px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .quick-access { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* Scrollbar */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+        /* Keyboard shortcut hints */
+        .kbd { 
+            display: inline-block; padding: 2px 5px; 
+            background: var(--border); border-radius: 3px; 
+            font-size: 10px; color: var(--text-light); 
+            font-family: monospace; margin-left: 4px;
+        }
+        /* Watchlist */
+        .watchlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        .watchlist-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            color: var(--text);
+            font-size: 13px;
+            transition: var(--transition);
+        }
+        .watchlist-item:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
+        }
+        .watchlist-item .wl-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #e53e3e;
+            flex-shrink: 0;
+        }
+        .watchlist-item .wl-info { flex: 1; }
+        .watchlist-item .wl-title { font-weight: 600; font-size: 13px; }
+        .watchlist-item .wl-sub { font-size: 11px; color: var(--text-light); }
+        /* Open All button */
+        .btn-action {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-action:hover { border-color: var(--accent); color: var(--accent); }
+        .result-count {
+            font-size: 13px; color: var(--text-light);
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
+        <div class="header-brand">
+            <div class="logo">BD</div>
+            <span>Bangladesh Professional Regulatory & Business Web Index</span>
+        </div>
+        <div class="header-search">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="searchInput" placeholder="Search organization, regulation, tax, audit, industry, portal..." oninput="handleSearch(this.value)" aria-label="Search resources">
+        </div>
+        <div class="header-actions">
+            <button class="header-btn" onclick="navigateTo('dashboard')" title="Dashboard"><span>◫</span></button>
+            <button class="header-btn" onclick="navigateTo('favorites')" title="Favorites"><span>★</span></button>
+            <button class="header-btn" onclick="toggleTheme()" title="Toggle theme" id="themeBtn">◐</button>
+            <button class="header-btn" onclick="showExportImport()" title="Export/Import">⇅</button>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <a class="sidebar-link active" onclick="navigateTo('dashboard')" data-page="dashboard"><span class="icon">◫</span> Dashboard</a>
+                <a class="sidebar-link" onclick="navigateTo('quickaccess')" data-page="quickaccess"><span class="icon">⚡</span> Quick Access</a>
+                <a class="sidebar-link" onclick="navigateTo('watchlist')" data-page="watchlist"><span class="icon">📡</span> Regulatory Watchlist</a>
+                <a class="sidebar-link" onclick="navigateTo('whatdoineed')" data-page="whatdoineed"><span class="icon">❓</span> What Do I Need?</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Categories</div>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Government')" data-page="Government"><span class="icon">🏛</span> Government</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Taxation')" data-page="Taxation"><span class="icon">💰</span> Taxation</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'VAT')" data-page="VAT"><span class="icon">📋</span> VAT</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Customs')" data-page="Customs"><span class="icon">🚢</span> Customs</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Corporate')" data-page="Corporate"><span class="icon">🏢</span> Corporate & Company Law</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Accounting & Audit')" data-page="Accounting & Audit"><span class="icon">📊</span> Accounting & Audit</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Banking & Finance')" data-page="Banking & Finance"><span class="icon">🏦</span> Banking & Finance</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Capital Market')" data-page="Capital Market"><span class="icon">📈</span> Capital Market</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Insurance')" data-page="Insurance"><span class="icon">🛡</span> Insurance</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Investment')" data-page="Investment"><span class="icon">💼</span> Investment & Business</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Trade')" data-page="Trade"><span class="icon">🌐</span> Import & Export</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Labour')" data-page="Labour"><span class="icon">👷</span> Labour & HR</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Legal')" data-page="Legal"><span class="icon">⚖</span> Legal & Judicial</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Industry')" data-page="Industry"><span class="icon">🏭</span> Industry Directory</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Professional Bodies')" data-page="Professional Bodies"><span class="icon">🎓</span> Professional Bodies</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'International')" data-page="International"><span class="icon">🌍</span> International Resources</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Statistics')" data-page="Statistics"><span class="icon">📉</span> Statistics & Economy</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Procurement')" data-page="Procurement"><span class="icon">📝</span> Procurement</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'AML/CFT')" data-page="AML/CFT"><span class="icon">🔒</span> AML / CFT</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'ESG')" data-page="ESG"><span class="icon">🌱</span> ESG / Sustainability</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Intellectual Property')" data-page="Intellectual Property"><span class="icon">©</span> Intellectual Property</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Environment')" data-page="Environment"><span class="icon">🌿</span> Environment</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Land & Property')" data-page="Land & Property"><span class="icon">🏗</span> Land & Property</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Compliance')" data-page="Compliance"><span class="icon">✓</span> Business Compliance</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'NGO')" data-page="NGO"><span class="icon">🤝</span> NGO & Non-Profit</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'E-Services')" data-page="E-Services"><span class="icon">💻</span> E-Services</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Telecom & ICT')" data-page="Telecom & ICT"><span class="icon">📡</span> Telecom & ICT</a>
+                <a class="sidebar-link" onclick="navigateTo('category', 'Energy')" data-page="Energy"><span class="icon">⚡</span> Energy & Power</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Personal</div>
+                <a class="sidebar-link" onclick="navigateTo('favorites')" data-page="favorites"><span class="icon">★</span> Favorites <span class="badge" id="favCount">0</span></a>
+                <a class="sidebar-link" onclick="navigateTo('recent')" data-page="recent"><span class="icon">🕐</span> Recently Visited</a>
+                <a class="sidebar-link" onclick="navigateTo('dailycheck')" data-page="dailycheck"><span class="icon">☀</span> Daily Check</a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Dashboard Page -->
+        <div class="page-section active" id="page-dashboard">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Dashboard</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">Dashboard</h1>
+                    <p class="section-subtitle">Bangladesh Professional Regulatory & Business Intelligence Hub</p>
+                </div>
+            </div>
+            <div class="stats-grid" id="statsGrid"></div>
+            <h3 style="margin-bottom:12px;font-size:16px;">Quick Access — Critical Resources</h3>
+            <div class="quick-access" id="quickAccessGrid"></div>
+            <h3 style="margin:24px 0 12px;font-size:16px;">Regulatory Watchlist</h3>
+            <div class="watchlist-grid" id="watchlistPreview"></div>
+            <h3 style="margin:24px 0 12px;font-size:16px;">Browse by Professional Role</h3>
+            <div class="pill-grid" id="rolePills"></div>
+            <h3 style="margin:24px 0 12px;font-size:16px;">Browse by Industry</h3>
+            <div class="pill-grid" id="industryPills"></div>
+            <h3 style="margin:24px 0 12px;font-size:16px;">Browse by Category</h3>
+            <div class="pill-grid" id="categoryPills"></div>
+        </div>
+
+        <!-- Category/Filter Page -->
+        <div class="page-section" id="page-category">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> <span id="breadcrumbCategory">Category</span></div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title" id="categoryTitle">Category</h1>
+                    <p class="section-subtitle" id="categorySubtitle"></p>
+                </div>
+                <button class="btn-action" onclick="openAllVisible()">⇗ Open All Visible</button>
+            </div>
+            <div class="filters-bar" id="filtersBar">
+                <select class="filter-select" id="filterPriority" onchange="applyFilters()">
+                    <option value="">All Priorities</option>
+                    <option value="Critical">🔴 Critical</option>
+                    <option value="High">🟠 High</option>
+                    <option value="Medium">🟡 Medium</option>
+                    <option value="Reference">🔵 Reference</option>
+                </select>
+                <select class="filter-select" id="filterType" onchange="applyFilters()">
+                    <option value="">All Types</option>
+                </select>
+                <select class="filter-select" id="filterJurisdiction" onchange="applyFilters()">
+                    <option value="">All Jurisdictions</option>
+                    <option value="Bangladesh Official">Bangladesh Official</option>
+                    <option value="Bangladesh Professional">Bangladesh Professional</option>
+                    <option value="International">International</option>
+                </select>
+            </div>
+            <div class="result-count" id="resultCount"></div>
+            <div class="cards-grid" id="categoryCards"></div>
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <div class="icon">🔍</div>
+                <h3>No resources found</h3>
+                <p>Try adjusting your filters or search terms.</p>
+                <button class="btn-action" style="margin-top:12px;" onclick="clearFilters()">Clear Filters</button>
+            </div>
+        </div>
+
+        <!-- Search Results Page -->
+        <div class="page-section" id="page-search">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Search Results</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">Search Results</h1>
+                    <p class="section-subtitle" id="searchSubtitle"></p>
+                </div>
+                <button class="btn-action" onclick="openAllVisible()">⇗ Open All Visible</button>
+            </div>
+            <div class="result-count" id="searchResultCount"></div>
+            <div class="cards-grid" id="searchCards"></div>
+            <div class="empty-state" id="searchEmpty" style="display:none;">
+                <div class="icon">🔍</div>
+                <h3>No resources found</h3>
+                <p>Try different keywords, clear filters, or browse categories.</p>
+            </div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div class="page-section" id="page-favorites">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Favorites</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">★ Favorites</h1>
+                    <p class="section-subtitle">Your bookmarked resources</p>
+                </div>
+                <button class="btn-action" onclick="openAllVisible()">⇗ Open All</button>
+            </div>
+            <div class="cards-grid" id="favCards"></div>
+            <div class="empty-state" id="favEmpty" style="display:none;">
+                <div class="icon">★</div>
+                <h3>No favorites yet</h3>
+                <p>Click the star icon on any resource to add it here.</p>
+            </div>
+        </div>
+
+        <!-- Recently Visited Page -->
+        <div class="page-section" id="page-recent">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Recently Visited</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">🕐 Recently Visited</h1>
+                    <p class="section-subtitle">Resources you've recently opened</p>
+                </div>
+                <button class="btn-action" onclick="clearHistory()">Clear History</button>
+            </div>
+            <div class="cards-grid" id="recentCards"></div>
+            <div class="empty-state" id="recentEmpty" style="display:none;">
+                <div class="icon">🕐</div>
+                <h3>No recent visits</h3>
+                <p>Resources you open will appear here.</p>
+            </div>
+        </div>
+
+        <!-- Regulatory Watchlist Page -->
+        <div class="page-section" id="page-watchlist">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Regulatory Watchlist</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">📡 Regulatory Watchlist</h1>
+                    <p class="section-subtitle">Key sources of regulatory change — monitor for updates</p>
+                </div>
+            </div>
+            <div class="watchlist-grid" id="fullWatchlist"></div>
+        </div>
+
+        <!-- What Do I Need Page -->
+        <div class="page-section" id="page-whatdoineed">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> What Do I Need?</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">❓ What Are You Trying To Do?</h1>
+                    <p class="section-subtitle">Select a task to see relevant official resources (navigation aid only — not legal advice)</p>
+                </div>
+            </div>
+            <div class="task-grid" id="taskGrid"></div>
+            <div id="taskResults"></div>
+        </div>
+
+        <!-- Quick Access Page -->
+        <div class="page-section" id="page-quickaccess">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Quick Access</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">⚡ Quick Access</h1>
+                    <p class="section-subtitle">Most frequently used critical professional resources</p>
+                </div>
+            </div>
+            <div class="cards-grid" id="quickAccessFull"></div>
+        </div>
+
+        <!-- Daily Check Page -->
+        <div class="page-section" id="page-dailycheck">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> Daily Check</div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title">☀ Daily / Regular Professional Check</h1>
+                    <p class="section-subtitle">Suggested monitoring frequency for regulatory updates</p>
+                </div>
+            </div>
+            <h3 style="margin-bottom:12px;font-size:15px;color:var(--danger);">🔴 Daily / Very Frequent</h3>
+            <div class="watchlist-grid" id="dailyWatch"></div>
+            <h3 style="margin:24px 0 12px;font-size:15px;color:var(--warning);">🟠 Weekly</h3>
+            <div class="watchlist-grid" id="weeklyWatch"></div>
+            <h3 style="margin:24px 0 12px;font-size:15px;color:var(--accent);">🔵 Monthly / Periodic</h3>
+            <div class="watchlist-grid" id="monthlyWatch"></div>
+        </div>
+
+        <!-- Role View Page -->
+        <div class="page-section" id="page-role">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> <span id="breadcrumbRole">Role</span></div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title" id="roleTitle">Professional Role</h1>
+                    <p class="section-subtitle" id="roleSubtitle">Resources relevant to this role</p>
+                </div>
+                <button class="btn-action" onclick="openAllVisible()">⇗ Open All Visible</button>
+            </div>
+            <div class="cards-grid" id="roleCards"></div>
+        </div>
+
+        <!-- Industry View Page -->
+        <div class="page-section" id="page-industry">
+            <div class="breadcrumb"><a onclick="navigateTo('dashboard')">Home</a> <span>/</span> <span id="breadcrumbIndustry">Industry</span></div>
+            <div class="section-header">
+                <div>
+                    <h1 class="section-title" id="industryTitle">Industry</h1>
+                    <p class="section-subtitle" id="industrySubtitle">Resources relevant to this industry</p>
+                </div>
+                <button class="btn-action" onclick="openAllVisible()">⇗ Open All Visible</button>
+            </div>
+            <div class="cards-grid" id="industryCards"></div>
+        </div>
+
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle" style="font-size:18px;font-weight:700;"></h2>
+                    <p id="modalType" style="font-size:13px;color:var(--text-light);margin-top:4px;"></p>
+                </div>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div style="margin-top:16px;display:flex;gap:8px;">
+                <a class="btn-open" id="modalOpen" href="#" target="_blank" rel="noopener noreferrer">Open Website ↗</a>
+                <button class="btn-fav" id="modalFav" onclick="toggleFavFromModal()">☆</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <p><strong>Bangladesh Professional Regulatory & Business Web Index</strong></p>
+        <p>Offline single-file professional reference portal</p>
+        <p style="margin-top:8px;max-width:700px;margin-left:auto;margin-right:auto;">Link verification status reflects the latest research performed during preparation. Government websites and URLs may change; users should verify critical regulatory information from the relevant authority.</p>
+        <p style="margin-top:12px;">Version: 1.0 | Last Updated: August 2026 | Jurisdiction: Bangladesh</p>
+        <p style="margin-top:8px;font-size:11px;"><em>Disclaimer: This portal is an organized directory of external resources and is not itself a government, regulatory, legal, accounting, auditing, or professional authority. Users should rely on the relevant authority's current publication, law, regulation, circular, notification, or official guidance for compliance decisions.</em></p>
+        <p style="margin-top:8px;font-size:11px;color:var(--text-muted);">Keyboard shortcuts: <span class="kbd">/</span> Search &nbsp; <span class="kbd">Esc</span> Close &nbsp; <span class="kbd">D</span> Dashboard &nbsp; <span class="kbd">F</span> Favorites</p>
+    </footer>
+
+    <script>
+    const resources = [
+        // ===== GOVERNMENT =====
+        {id:"gov-portal",name:"Bangladesh National Portal",category:"Government",subcategory:"Government Portal",type:"Government Portal",priority:"Critical",url:"https://www.bangladesh.gov.bd",description:"Official gateway to all government ministries, departments, and services.",tags:["Government","Portal","Ministries"],roles:["All"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"daily"},
+        {id:"mof",name:"Ministry of Finance",category:"Government",subcategory:"Finance",type:"Government Authority",priority:"Critical",url:"https://www.mof.gov.bd",description:"Fiscal policy, budget, economic management.",tags:["Finance","Budget","Government"],roles:["CFO","Finance Manager","Accountant","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"mof-fd",name:"Finance Division",category:"Government",subcategory:"Finance",type:"Government Authority",priority:"High",url:"https://www.financedivision.gov.bd",description:"Budget, expenditure, and fiscal policy division.",tags:["Finance","Budget"],roles:["CFO","Finance Manager"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"mof-ird",name:"Internal Resources Division",category:"Government",subcategory:"Finance",type:"Government Authority",priority:"High",url:"https://www.ird.gov.bd",description:"Oversees NBR and tax policy.",tags:["Tax","Revenue","Policy"],roles:["Tax Practitioner","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"mof-fid",name:"Financial Institutions Division",category:"Government",subcategory:"Finance",type:"Government Authority",priority:"High",url:"https://www.fid.gov.bd",description:"Oversees banks, insurance, NBFIs policy.",tags:["Banking","Insurance","Financial Institutions"],roles:["Banker","Insurance Professional","CFO"],industries:["Banking","Insurance"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"mincom",name:"Ministry of Commerce",category:"Government",subcategory:"Commerce",type:"Government Authority",priority:"Critical",url:"https://www.mincom.gov.bd",description:"Trade policy, import/export regulation, company law.",tags:["Commerce","Trade","Import","Export"],roles:["Business Owner","Importer","Exporter","Company Secretary"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"moind",name:"Ministry of Industries",category:"Government",subcategory:"Industries",type:"Government Authority",priority:"High",url:"https://www.moind.gov.bd",description:"Industrial policy, BSTI, BSCIC, DPDT oversight.",tags:["Industry","Manufacturing","Standards"],roles:["Business Owner","Manufacturer"],industries:["Manufacturing"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"molaw",name:"Ministry of Law, Justice and Parliamentary Affairs",category:"Government",subcategory:"Law",type:"Government Authority",priority:"High",url:"https://www.minlaw.gov.bd",description:"Legislation, legal affairs, judicial administration.",tags:["Law","Legislation","Judicial"],roles:["Legal Professional","Company Secretary"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"molabour",name:"Ministry of Labour and Employment",category:"Government",subcategory:"Labour",type:"Government Authority",priority:"Critical",url:"https://www.mole.gov.bd",description:"Labour law, employment policy, worker welfare.",tags:["Labour","Employment","HR","Workers"],roles:["HR Professional","Compliance Officer","Business Owner","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"moef",name:"Ministry of Environment, Forest and Climate Change",category:"Government",subcategory:"Environment",type:"Government Authority",priority:"High",url:"https://www.moef.gov.bd",description:"Environmental policy, climate change, forest conservation.",tags:["Environment","Climate","Forest"],roles:["Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"mopower",name:"Ministry of Power, Energy and Mineral Resources",category:"Government",subcategory:"Energy",type:"Government Authority",priority:"High",url:"https://www.powerdivision.gov.bd",description:"Power, energy, and mineral resources policy.",tags:["Energy","Power","Minerals"],roles:["Business Owner"],industries:["Energy","Power"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"moict",name:"ICT Division",category:"Government",subcategory:"ICT",type:"Government Authority",priority:"High",url:"https://www.ictd.gov.bd",description:"ICT policy, digital Bangladesh, tech regulation.",tags:["ICT","Technology","Digital"],roles:["IT Professional","Business Owner"],industries:["ICT","Telecom"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"mofa",name:"Ministry of Foreign Affairs",category:"Government",subcategory:"Foreign Affairs",type:"Government Authority",priority:"Medium",url:"https://www.mofa.gov.bd",description:"Foreign relations, international agreements.",tags:["Foreign Affairs","Diplomacy"],roles:["Business Owner","Exporter"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"moha",name:"Ministry of Home Affairs",category:"Government",subcategory:"Home Affairs",type:"Government Authority",priority:"Medium",url:"https://www.mha.gov.bd",description:"Internal security, law enforcement, immigration.",tags:["Security","Immigration"],roles:["All"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"mopa",name:"Ministry of Public Administration",category:"Government",subcategory:"Public Administration",type:"Government Authority",priority:"Medium",url:"https://www.mopa.gov.bd",description:"Civil service administration and public sector.",tags:["Public Administration","Civil Service"],roles:["All"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"moplanning",name:"Ministry of Planning",category:"Government",subcategory:"Planning",type:"Government Authority",priority:"High",url:"https://www.plancom.gov.bd",description:"National development planning and economic policy.",tags:["Planning","Development","Economy"],roles:["Economist","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"molgrd",name:"Ministry of Local Government",category:"Government",subcategory:"Local Government",type:"Government Authority",priority:"Medium",url:"https://www.lgrd.gov.bd",description:"Local government, rural development, cooperatives.",tags:["Local Government","Rural Development"],roles:["Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"moland",name:"Ministry of Land",category:"Government",subcategory:"Land",type:"Government Authority",priority:"Medium",url:"https://www.minland.gov.bd",description:"Land administration, records, land reform.",tags:["Land","Property"],roles:["Business Owner","Legal Professional"],industries:["Real Estate"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"moshipping",name:"Ministry of Shipping",category:"Government",subcategory:"Shipping",type:"Government Authority",priority:"Medium",url:"https://www.mos.gov.bd",description:"Shipping, ports, maritime affairs.",tags:["Shipping","Ports","Maritime"],roles:["Importer","Exporter"],industries:["Shipping","Logistics"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"motb",name:"Ministry of Textiles and Jute",category:"Government",subcategory:"Textiles",type:"Government Authority",priority:"High",url:"https://www.motj.gov.bd",description:"Textile and jute sector policy.",tags:["Textile","Jute","Garments"],roles:["Business Owner","Manufacturer"],industries:["Textile","Garments"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"cabinet",name:"Cabinet Division",category:"Government",subcategory:"Government Portal",type:"Government Authority",priority:"Medium",url:"https://www.cabinet.gov.bd",description:"Government decisions, notifications, policy approvals.",tags:["Cabinet","Policy","Government"],roles:["All"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        // ===== TAXATION =====
+        {id:"nbr",name:"National Board of Revenue (NBR)",category:"Taxation",subcategory:"Income Tax",type:"Government Authority",priority:"Critical",url:"https://www.nbr.gov.bd",description:"Central tax authority — income tax, VAT, customs. SROs, circulars, notifications.",tags:["Tax","Income Tax","VAT","Customs","SRO","Circular","NBR"],roles:["Accountant","Auditor","Tax Practitioner","CFO","Business Owner","Finance Manager"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"daily"},
+        {id:"nbr-etin",name:"e-TIN Registration",category:"Taxation",subcategory:"e-TIN",type:"E-Service",priority:"Critical",url:"https://secure.incometax.gov.bd",description:"Online TIN registration and taxpayer portal.",tags:["Tax","TIN","Registration","e-TIN"],roles:["Tax Practitioner","Business Owner","Accountant"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"as-needed"},
+        {id:"nbr-ereturn",name:"e-Return (Income Tax)",category:"Taxation",subcategory:"Tax Return",type:"E-Service",priority:"Critical",url:"https://secure.incometax.gov.bd",description:"Online income tax return filing.",tags:["Tax","Return","Filing","Income Tax","e-Return"],roles:["Tax Practitioner","Accountant","Auditor","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"annual"},
+        {id:"nbr-sro",name:"NBR SROs & Circulars",category:"Taxation",subcategory:"SRO/Circular",type:"Circular Repository",priority:"Critical",url:"https://www.nbr.gov.bd/en/sro",description:"SROs, circulars, notifications on tax matters.",tags:["Tax","SRO","Circular","Notification"],roles:["Tax Practitioner","Accountant","Auditor","CFO","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Circular Repository",verified:true,frequency:"daily"},
+        {id:"nbr-incometax",name:"Income Tax Wing",category:"Taxation",subcategory:"Income Tax",type:"Government Authority",priority:"Critical",url:"https://www.incometax.gov.bd",description:"Income Tax wing — direct taxes, circles, assessment.",tags:["Tax","Income Tax","Assessment","Circles"],roles:["Tax Practitioner","Accountant","Auditor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"daily"},
+        {id:"nbr-tax-law",name:"Income Tax Act (via Bangladesh Laws)",category:"Taxation",subcategory:"Tax Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Income Tax laws accessible via Bangladesh Laws database.",tags:["Tax","Law","Income Tax Act","Finance Act"],roles:["Tax Practitioner","Legal Professional","Accountant"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"annual"},
+        {id:"nbr-tp",name:"Transfer Pricing Cell (NBR)",category:"Taxation",subcategory:"Transfer Pricing",type:"Government Authority",priority:"High",url:"https://www.nbr.gov.bd/en/transfer-pricing",description:"Transfer pricing documentation and compliance.",tags:["Tax","Transfer Pricing","International Tax"],roles:["Tax Practitioner","CFO","Auditor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"quarterly"},
+        {id:"nbr-treaty",name:"Tax Treaties (DTA)",category:"Taxation",subcategory:"Tax Treaty",type:"Reference Database",priority:"High",url:"https://www.nbr.gov.bd/en/double-taxation-avoidance-agreement",description:"Double Taxation Avoidance Agreements.",tags:["Tax","Treaty","DTA","International Tax"],roles:["Tax Practitioner","CFO","Auditor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Reference Database",verified:true,frequency:"as-needed"},
+        // ===== VAT =====
+        {id:"vat-online",name:"VAT Online System (NBR)",category:"VAT",subcategory:"VAT Registration",type:"Filing Portal",priority:"Critical",url:"https://www.vat.gov.bd",description:"Online VAT registration, return filing, payment.",tags:["VAT","Registration","Return","Filing","BIN"],roles:["Tax Practitioner","Accountant","Business Owner","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"monthly"},
+        {id:"vat-law",name:"VAT and Supplementary Duty Act 2012",category:"VAT",subcategory:"VAT Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Primary VAT legislation.",tags:["VAT","Law","Act","Supplementary Duty"],roles:["Tax Practitioner","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"vat-sro",name:"VAT SROs & Circulars",category:"VAT",subcategory:"SRO/Circular",type:"Circular Repository",priority:"Critical",url:"https://www.nbr.gov.bd/en/sro",description:"SROs, circulars for VAT administration.",tags:["VAT","SRO","Circular"],roles:["Tax Practitioner","Accountant","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Circular Repository",verified:true,frequency:"weekly"},
+        // ===== CUSTOMS =====
+        {id:"customs-bd",name:"NBR Customs Wing",category:"Customs",subcategory:"Customs",type:"Government Authority",priority:"Critical",url:"https://www.customs.gov.bd",description:"Customs duty, import/export procedures, tariff.",tags:["Customs","Import","Export","Tariff","Duty"],roles:["Importer","Exporter","Customs Agent","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"daily"},
+        {id:"customs-chattogram",name:"Chattogram Customs House",category:"Customs",subcategory:"Customs",type:"Government Authority",priority:"High",url:"https://chc.gov.bd",description:"Major customs house — Chattogram port.",tags:["Customs","Chattogram","Port"],roles:["Importer","Exporter","Customs Agent"],industries:["Shipping","Logistics"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"customs-dhaka",name:"Dhaka Customs House",category:"Customs",subcategory:"Customs",type:"Government Authority",priority:"High",url:"https://dhakacustoms.gov.bd",description:"Customs house — Dhaka air cargo.",tags:["Customs","Dhaka","Air Cargo"],roles:["Importer","Exporter"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"customs-asyCUDA",name:"ASYCUDA World (Customs)",category:"Customs",subcategory:"Customs System",type:"E-Service",priority:"High",url:"https://epw1.asycuda.org/",description:"Electronic customs declarations system.",tags:["Customs","ASYCUDA","Declaration"],roles:["Importer","Exporter","Customs Agent"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"daily"},
+        {id:"customs-bond",name:"Bond Commissionerate",category:"Customs",subcategory:"Bonded Warehouse",type:"Government Authority",priority:"High",url:"https://cbc.gov.bd",description:"Bonded warehouse facilities for exporters.",tags:["Customs","Bond","Warehouse","Export"],roles:["Exporter","Manufacturer"],industries:["Garments","Textile","Manufacturing"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"customs-tariff",name:"Bangladesh Customs Tariff",category:"Customs",subcategory:"Tariff",type:"Reference Database",priority:"High",url:"https://www.nbr.gov.bd/en/customs-tariff",description:"HS code based customs tariff schedule.",tags:["Customs","Tariff","HS Code","Duty Rate"],roles:["Importer","Exporter","Customs Agent"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Reference Database",verified:true,frequency:"annual"},
+        {id:"trade-portal",name:"Bangladesh Trade Portal",category:"Customs",subcategory:"Trade",type:"Government Portal",priority:"High",url:"https://bangladeshtradeportal.gov.bd",description:"Import/export procedures, SPS measures, trade regulations.",tags:["Trade","Import","Export","Procedures"],roles:["Importer","Exporter","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Government Portal",verified:true,frequency:"quarterly"},
+        // ===== CORPORATE =====
+        {id:"rjsc",name:"Registrar of Joint Stock Companies (RJSC)",category:"Corporate",subcategory:"Company Registration",type:"Government Authority",priority:"Critical",url:"https://www.roc.gov.bd",description:"Company registration, name clearance, annual returns, partnerships.",tags:["Corporate","Company","Registration","RJSC","Incorporation","Annual Return"],roles:["Company Secretary","Business Owner","Legal Professional","Chartered Accountant","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"rjsc-portal",name:"RJSC Online Services Portal",category:"Corporate",subcategory:"Filing",type:"Filing Portal",priority:"Critical",url:"https://app.roc.gov.bd",description:"Online name clearance, incorporation, annual returns.",tags:["Corporate","Filing","Name Clearance","Incorporation"],roles:["Company Secretary","Business Owner","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"as-needed"},
+        {id:"company-act",name:"Companies Act 1994",category:"Corporate",subcategory:"Company Law",type:"Law Database",priority:"Critical",url:"https://bdlaws.minlaw.gov.bd/act-section-292.html",description:"Primary legislation governing companies.",tags:["Corporate","Company Law","Companies Act"],roles:["Company Secretary","Legal Professional","Chartered Accountant","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"corporate-governance",name:"BSEC Corporate Governance Code",category:"Corporate",subcategory:"Corporate Governance",type:"Regulation",priority:"High",url:"https://sec.gov.bd/home/corporate-governance",description:"Corporate governance code for listed companies.",tags:["Corporate Governance","Listed Company","Board","Disclosure"],roles:["Company Secretary","CFO","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Regulation",verified:true,frequency:"as-needed"},
+        // ===== ACCOUNTING & AUDIT =====
+        {id:"icab",name:"Institute of Chartered Accountants of Bangladesh (ICAB)",category:"Accounting & Audit",subcategory:"Professional Body",type:"Professional Body",priority:"Critical",url:"https://www.icab.org.bd",description:"National professional body for CAs. Regulates CA profession, auditing standards, pronouncements.",tags:["Accounting","Audit","CA","Professional Body","Standards","ICAB"],roles:["Chartered Accountant","Auditor","Accountant"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Professional Body",verified:true,frequency:"weekly"},
+        {id:"icab-standards",name:"ICAB — Accounting & Auditing Standards",category:"Accounting & Audit",subcategory:"Standards",type:"Technical Resource",priority:"Critical",url:"https://www.icab.org.bd/professional-resources",description:"BFRS and BSA issued by ICAB.",tags:["BFRS","BSA","Standards","IFRS","ISA"],roles:["Chartered Accountant","Auditor","Accountant","CFO"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Technical Resource",verified:true,frequency:"quarterly"},
+        {id:"icab-cpd",name:"ICAB — CPD Programs",category:"Accounting & Audit",subcategory:"Professional Development",type:"Professional Body",priority:"High",url:"https://www.icab.org.bd/members/continuing-professional-development-cpd",description:"Continuing Professional Development for ICAB members.",tags:["CPD","Training","Professional Development"],roles:["Chartered Accountant","Auditor"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Professional Body",verified:true,frequency:"monthly"},
+        {id:"icmab",name:"Institute of Cost and Management Accountants of Bangladesh (ICMAB)",category:"Accounting & Audit",subcategory:"Professional Body",type:"Professional Body",priority:"High",url:"https://www.icmab.org.bd",description:"National body for Cost and Management Accountants. CMA qualification.",tags:["Cost Accounting","Management Accounting","CMA"],roles:["Accountant","Finance Manager","CFO"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Professional Body",verified:true,frequency:"monthly"},
+        {id:"icsb",name:"Institute of Chartered Secretaries of Bangladesh (ICSB)",category:"Accounting & Audit",subcategory:"Professional Body",type:"Professional Body",priority:"High",url:"https://www.icsb.gov.bd",description:"National body for Company Secretaries.",tags:["Company Secretary","Corporate Governance","Professional Body"],roles:["Company Secretary","Legal Professional","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Professional Body",verified:true,frequency:"monthly"},
+        {id:"frc",name:"Financial Reporting Council (FRC)",category:"Accounting & Audit",subcategory:"Regulator",type:"Government Authority",priority:"Critical",url:"https://www.frc.gov.bd",description:"Regulatory body for financial reporting, auditing standards, audit quality. Standards for PIEs.",tags:["FRC","Financial Reporting","Audit Quality","Standards","Regulator"],roles:["Chartered Accountant","Auditor","CFO","Company Secretary","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Regulator",verified:true,frequency:"weekly"},
+        {id:"frc-enlistment",name:"FRC Auditor Enlistment",category:"Accounting & Audit",subcategory:"Regulator",type:"E-Service",priority:"High",url:"https://enlistment.frc.gov.bd",description:"FRC portal for auditor enlistment for PIEs.",tags:["FRC","Auditor","Enlistment"],roles:["Chartered Accountant","Auditor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"E-Service",verified:true,frequency:"as-needed"},
+        {id:"fra-2015",name:"Financial Reporting Act 2015",category:"Accounting & Audit",subcategory:"Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Establishes FRC and governs financial reporting.",tags:["FRA","Financial Reporting","Law","Act"],roles:["Chartered Accountant","Auditor","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        // ===== BANKING & FINANCE =====
+        {id:"bb",name:"Bangladesh Bank",category:"Banking & Finance",subcategory:"Central Bank",type:"Government Authority",priority:"Critical",url:"https://www.bb.org.bd",description:"Central bank — circulars, monetary policy, forex, AML/CFT, payment systems.",tags:["Banking","Central Bank","Monetary Policy","Forex","AML","Circular"],roles:["Banker","CFO","Finance Manager","Compliance Officer","Auditor","Chartered Accountant"],industries:["Banking","Finance"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"daily"},
+        {id:"bb-circulars",name:"Bangladesh Bank — Circulars",category:"Banking & Finance",subcategory:"Circulars",type:"Circular Repository",priority:"Critical",url:"https://www.bb.org.bd/en/index.php/mediaroom/circular",description:"All circulars and circular letters.",tags:["Banking","Circular","Regulation","BRPD"],roles:["Banker","CFO","Compliance Officer","Auditor"],industries:["Banking","Finance"],jurisdiction:"Bangladesh Official",resourceType:"Circular Repository",verified:true,frequency:"daily"},
+        {id:"bb-fe",name:"Bangladesh Bank — Foreign Exchange",category:"Banking & Finance",subcategory:"Foreign Exchange",type:"Regulation",priority:"Critical",url:"https://www.bb.org.bd/en/index.php/mediaroom/circular/fepd",description:"Foreign exchange circulars and guidelines.",tags:["Forex","Foreign Exchange","LC","Remittance"],roles:["Banker","Importer","Exporter","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Circular Repository",verified:true,frequency:"daily"},
+        {id:"bb-monetary",name:"Bangladesh Bank — Monetary Policy",category:"Banking & Finance",subcategory:"Monetary Policy",type:"Publication",priority:"High",url:"https://www.bb.org.bd/en/index.php/publications/monetary-policy-statement",description:"Monetary Policy Statements.",tags:["Monetary Policy","Interest Rate","Inflation"],roles:["Banker","CFO","Economist"],industries:["Banking"],jurisdiction:"Bangladesh Official",resourceType:"Publication",verified:true,frequency:"semi-annual"},
+        {id:"bb-stats",name:"Bangladesh Bank — Statistics",category:"Banking & Finance",subcategory:"Statistics",type:"Statistical Database",priority:"High",url:"https://www.bb.org.bd/en/index.php/about/publication/economic-trends",description:"Economic trends, banking statistics, BoP.",tags:["Statistics","Economic Data","Banking Data"],roles:["Economist","CFO","Analyst"],industries:["Banking"],jurisdiction:"Bangladesh Official",resourceType:"Statistical Database",verified:true,frequency:"monthly"},
+        {id:"bb-bfiu",name:"BFIU — Financial Intelligence Unit",category:"Banking & Finance",subcategory:"AML/CFT",type:"Government Authority",priority:"Critical",url:"https://www.bb.org.bd/en/index.php/bfiu-unit",description:"AML/CFT monitoring, STR/CTR reporting.",tags:["AML","CFT","BFIU","STR"],roles:["Compliance Officer","Banker","Auditor"],industries:["Banking","Finance"],jurisdiction:"Bangladesh Official",resourceType:"Government Authority",verified:true,frequency:"weekly"},
+        {id:"bb-exchange",name:"Exchange Rate Information",category:"Banking & Finance",subcategory:"Foreign Exchange",type:"Statistical Database",priority:"High",url:"https://www.bb.org.bd/en/index.php/exchange-rate",description:"Official exchange rates.",tags:["Exchange Rate","Forex","BDT","Currency"],roles:["Banker","Importer","Exporter","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Statistical Database",verified:true,frequency:"daily"},
+        {id:"bb-cib",name:"Credit Information Bureau (CIB)",category:"Banking & Finance",subcategory:"Credit",type:"E-Service",priority:"High",url:"https://cib.bb.org.bd",description:"Credit reports on borrowers.",tags:["Credit","CIB","Loan","Borrower"],roles:["Banker","CFO","Finance Manager"],industries:["Banking"],jurisdiction:"Bangladesh Official",resourceType:"E-Service",verified:true,frequency:"as-needed"},
+        // ===== CAPITAL MARKET =====
+        {id:"bsec",name:"Bangladesh Securities and Exchange Commission (BSEC)",category:"Capital Market",subcategory:"Regulator",type:"Government Authority",priority:"Critical",url:"https://www.sec.gov.bd",description:"Capital market regulator — securities, IPO, corporate governance, disclosures.",tags:["Capital Market","Securities","BSEC","IPO","Listed Company"],roles:["CFO","Company Secretary","Investment Professional","Compliance Officer","Auditor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"bsec-notices",name:"BSEC — Notices & Orders",category:"Capital Market",subcategory:"Notices",type:"Circular Repository",priority:"High",url:"https://sec.gov.bd/home/notice",description:"Notices, orders, and notifications from BSEC.",tags:["BSEC","Notice","Order"],roles:["CFO","Company Secretary","Investment Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Circular Repository",verified:true,frequency:"weekly"},
+        {id:"dse",name:"Dhaka Stock Exchange (DSE)",category:"Capital Market",subcategory:"Stock Exchange",type:"Market Infrastructure",priority:"Critical",url:"https://www.dsebd.org",description:"Primary stock exchange — market data, listed companies, trading.",tags:["Stock Exchange","DSE","Market Data","Trading"],roles:["Investment Professional","CFO","Analyst"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Market Infrastructure",verified:true,frequency:"daily"},
+        {id:"cse",name:"Chittagong Stock Exchange (CSE)",category:"Capital Market",subcategory:"Stock Exchange",type:"Market Infrastructure",priority:"High",url:"https://www.cse.com.bd",description:"Second stock exchange in Chattogram.",tags:["Stock Exchange","CSE","Market Data"],roles:["Investment Professional","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Market Infrastructure",verified:true,frequency:"daily"},
+        {id:"cdbl",name:"Central Depository Bangladesh Limited (CDBL)",category:"Capital Market",subcategory:"Depository",type:"Market Infrastructure",priority:"High",url:"https://www.cdbl.com.bd",description:"Central securities depository — demat, settlement, ISIN.",tags:["Depository","CDBL","Demat","Settlement"],roles:["Investment Professional","Company Secretary"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Market Infrastructure",verified:true,frequency:"as-needed"},
+        // ===== INSURANCE =====
+        {id:"idra",name:"Insurance Development and Regulatory Authority (IDRA)",category:"Insurance",subcategory:"Regulator",type:"Government Authority",priority:"Critical",url:"https://www.idra.org.bd",description:"Sole insurance sector regulator — regulations, circulars, guidelines.",tags:["Insurance","IDRA","Regulator","Life Insurance","General Insurance"],roles:["Insurance Professional","Auditor","Compliance Officer","CFO"],industries:["Insurance"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"weekly"},
+        {id:"insurance-act",name:"Insurance Act 2010",category:"Insurance",subcategory:"Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Primary insurance legislation.",tags:["Insurance","Law","Act"],roles:["Insurance Professional","Legal Professional"],industries:["Insurance"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"sbc",name:"Sadharan Bima Corporation",category:"Insurance",subcategory:"State Owned",type:"Government Authority",priority:"Medium",url:"https://www.sbc.gov.bd",description:"State-owned general insurance corporation.",tags:["Insurance","General Insurance","State Owned"],roles:["Insurance Professional"],industries:["Insurance"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"jbc",name:"Jiban Bima Corporation",category:"Insurance",subcategory:"State Owned",type:"Government Authority",priority:"Medium",url:"https://www.jbc.gov.bd",description:"State-owned life insurance corporation.",tags:["Insurance","Life Insurance","State Owned"],roles:["Insurance Professional"],industries:["Insurance"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        // ===== INVESTMENT & BUSINESS =====
+        {id:"bida",name:"Bangladesh Investment Development Authority (BIDA)",category:"Investment",subcategory:"Investment Authority",type:"Government Authority",priority:"Critical",url:"https://www.bida.gov.bd",description:"Apex investment agency — registration, approvals, one-stop service.",tags:["Investment","BIDA","Registration","One Stop Service","Foreign Investment"],roles:["Business Owner","Entrepreneur","Investment Professional","CFO"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"bida-oss",name:"BIDA One Stop Service (OSS)",category:"Investment",subcategory:"E-Service",type:"E-Service",priority:"Critical",url:"https://bidaquickserv.org",description:"Online portal integrating 35+ agencies for business setup.",tags:["OSS","License","Permit","Business Setup"],roles:["Business Owner","Entrepreneur"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"as-needed"},
+        {id:"beza",name:"Bangladesh Economic Zones Authority (BEZA)",category:"Investment",subcategory:"Economic Zones",type:"Government Authority",priority:"High",url:"https://www.beza.gov.bd",description:"Economic zones establishment and management.",tags:["Economic Zone","BEZA","Industrial Zone"],roles:["Business Owner","Manufacturer"],industries:["Manufacturing"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"bepza",name:"Bangladesh Export Processing Zones Authority (BEPZA)",category:"Investment",subcategory:"EPZ",type:"Government Authority",priority:"High",url:"https://www.bepza.gov.bd",description:"Export Processing Zones management.",tags:["EPZ","Export","BEPZA"],roles:["Exporter","Manufacturer","Business Owner"],industries:["Garments","Manufacturing"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"bhtpa",name:"Bangladesh Hi-Tech Park Authority",category:"Investment",subcategory:"Hi-Tech Park",type:"Government Authority",priority:"Medium",url:"https://www.bhtpa.gov.bd",description:"Hi-tech parks management.",tags:["Hi-Tech Park","IT","Technology"],roles:["IT Professional","Business Owner"],industries:["ICT"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        // ===== IMPORT & EXPORT =====
+        {id:"epb",name:"Export Promotion Bureau (EPB)",category:"Trade",subcategory:"Export",type:"Government Authority",priority:"High",url:"https://www.epb.gov.bd",description:"Export promotion, certificates, trade statistics.",tags:["Export","EPB","Trade","Statistics"],roles:["Exporter","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"cciande",name:"CCI&E — Import/Export Registration",category:"Trade",subcategory:"IRC/ERC",type:"Government Authority",priority:"Critical",url:"https://www.cciande.gov.bd",description:"Issues IRC and ERC certificates.",tags:["IRC","ERC","Import","Export","Registration"],roles:["Importer","Exporter","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"bgmea",name:"BGMEA",category:"Trade",subcategory:"Industry Association",type:"Industry Association",priority:"High",url:"https://www.bgmea.org.bd",description:"Apex trade body for RMG export industry.",tags:["Garments","RMG","Export","BGMEA"],roles:["Business Owner","Manufacturer","Exporter"],industries:["Garments","Textile"],jurisdiction:"Bangladesh Professional",resourceType:"Industry Association",verified:true,frequency:"monthly"},
+        {id:"bkmea",name:"BKMEA",category:"Trade",subcategory:"Industry Association",type:"Industry Association",priority:"High",url:"https://www.bkmea.org.bd",description:"Knitwear manufacturers and exporters association.",tags:["Knitwear","Export","BKMEA"],roles:["Business Owner","Manufacturer","Exporter"],industries:["Garments","Textile"],jurisdiction:"Bangladesh Professional",resourceType:"Industry Association",verified:true,frequency:"monthly"},
+        // ===== LABOUR & HR =====
+        {id:"dol",name:"Department of Labour",category:"Labour",subcategory:"Labour Authority",type:"Government Authority",priority:"Critical",url:"https://www.dol.gov.bd",description:"Labour laws, factory inspections, worker registration.",tags:["Labour","Department","Factory","Worker"],roles:["HR Professional","Compliance Officer","Business Owner","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"labour-act",name:"Bangladesh Labour Act 2006",category:"Labour",subcategory:"Labour Law",type:"Law Database",priority:"Critical",url:"https://bdlaws.minlaw.gov.bd/act-section-710.html",description:"Primary legislation for employment, wages, conditions, benefits.",tags:["Labour","Act","Law","Employment","Wages"],roles:["HR Professional","Legal Professional","Compliance Officer","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"labour-rules",name:"Bangladesh Labour Rules 2015",category:"Labour",subcategory:"Labour Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Detailed rules under Labour Act.",tags:["Labour","Rules","Compliance"],roles:["HR Professional","Legal Professional","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"dife",name:"DIFE — Factory Inspection",category:"Labour",subcategory:"Factory Compliance",type:"Government Authority",priority:"High",url:"https://www.dife.gov.bd",description:"Factory inspections, workplace safety, compliance.",tags:["Factory","Inspection","Safety","Compliance","DIFE"],roles:["Compliance Officer","HR Professional","Manufacturer"],industries:["Manufacturing","Garments"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"wage-board",name:"Minimum Wage Board",category:"Labour",subcategory:"Wages",type:"Government Authority",priority:"High",url:"https://www.dol.gov.bd",description:"Minimum wage notifications for sectors.",tags:["Minimum Wage","Salary"],roles:["HR Professional","Business Owner","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Government Authority",verified:true,frequency:"periodic"},
+        // ===== LEGAL & JUDICIAL =====
+        {id:"supremecourt",name:"Supreme Court of Bangladesh",category:"Legal",subcategory:"Court",type:"Judicial",priority:"High",url:"https://www.supremecourt.gov.bd",description:"Highest court — judgments and cause lists.",tags:["Court","Supreme Court","Judgment"],roles:["Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Judicial",verified:true,frequency:"weekly"},
+        {id:"bdlaws",name:"Bangladesh Laws (bdlaws.minlaw.gov.bd)",category:"Legal",subcategory:"Law Database",type:"Law Database",priority:"Critical",url:"https://bdlaws.minlaw.gov.bd",description:"All Bangladesh laws — Acts, Ordinances, Rules, Regulations.",tags:["Law","Act","Ordinance","Rules","Legislation"],roles:["Legal Professional","Compliance Officer","Company Secretary","Chartered Accountant"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"law-commission",name:"Law Commission of Bangladesh",category:"Legal",subcategory:"Legal Reform",type:"Government Authority",priority:"Medium",url:"https://lawcommission.gov.bd",description:"Law reform and legal modernization.",tags:["Law Reform","Commission"],roles:["Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Government Authority",verified:true,frequency:"as-needed"},
+        {id:"gazette",name:"Bangladesh Gazette (BG Press)",category:"Legal",subcategory:"Gazette",type:"Gazette",priority:"Critical",url:"https://www.bgpress.gov.bd",description:"Official gazette — notifications, SROs, legal notices.",tags:["Gazette","Notification","SRO","Official Publication"],roles:["Legal Professional","Compliance Officer","Chartered Accountant","Company Secretary"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Gazette",verified:true,frequency:"weekly"},
+        // ===== INDUSTRY =====
+        {id:"dgda",name:"DGDA — Drug Administration",category:"Industry",subcategory:"Pharmaceuticals",type:"Government Authority",priority:"High",url:"https://www.dgda.gov.bd",description:"Pharmaceutical industry regulator — drug registration, licensing.",tags:["Pharmaceuticals","Drug","License","DGDA"],roles:["Business Owner","Compliance Officer"],industries:["Pharmaceuticals","Healthcare"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"btrc",name:"BTRC — Telecom Regulatory Commission",category:"Industry",subcategory:"Telecom",type:"Government Authority",priority:"High",url:"https://www.btrc.gov.bd",description:"Telecom regulation, spectrum management, ICT services.",tags:["Telecom","BTRC","Spectrum","License"],roles:["Business Owner","Compliance Officer","IT Professional"],industries:["Telecom","ICT"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"bsti",name:"BSTI — Standards and Testing",category:"Industry",subcategory:"Standards",type:"Government Authority",priority:"High",url:"https://www.bsti.gov.bd",description:"National standards body — certification, testing.",tags:["Standards","BSTI","Certification","Quality"],roles:["Manufacturer","Business Owner","Compliance Officer"],industries:["Manufacturing","Food"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"caab",name:"CAAB — Civil Aviation Authority",category:"Industry",subcategory:"Aviation",type:"Government Authority",priority:"Medium",url:"https://www.caab.gov.bd",description:"Civil aviation, airports, air safety.",tags:["Aviation","CAAB","Airport"],roles:["Business Owner"],industries:["Aviation","Logistics"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"ugc",name:"UGC — University Grants Commission",category:"Industry",subcategory:"Education",type:"Government Authority",priority:"Medium",url:"https://www.ugc.gov.bd",description:"Higher education regulatory body.",tags:["Education","University","UGC"],roles:["Education Professional"],industries:["Education"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"bscic",name:"BSCIC — Small and Cottage Industries",category:"Industry",subcategory:"SME",type:"Government Authority",priority:"Medium",url:"https://www.bscic.gov.bd",description:"Small and cottage industries development.",tags:["SME","Small Industry","BSCIC"],roles:["Business Owner","Entrepreneur"],industries:["SME","Manufacturing"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"basis",name:"BASIS — Software and IT Services",category:"Industry",subcategory:"Industry Association",type:"Industry Association",priority:"High",url:"https://basis.org.bd",description:"Apex trade body for software and IT industry.",tags:["Software","IT","BASIS","Association"],roles:["IT Professional","Business Owner"],industries:["ICT","Software"],jurisdiction:"Bangladesh Professional",resourceType:"Industry Association",verified:true,frequency:"monthly"},
+        // ===== ENERGY =====
+        {id:"berc",name:"BERC — Energy Regulatory Commission",category:"Energy",subcategory:"Energy Regulator",type:"Government Authority",priority:"High",url:"https://www.berc.gov.bd",description:"Energy pricing, gas, electricity tariffs.",tags:["Energy","BERC","Gas","Electricity","Tariff"],roles:["Business Owner","CFO"],industries:["Energy","Power"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"petrobangla",name:"Petrobangla",category:"Energy",subcategory:"Petroleum",type:"Government Authority",priority:"Medium",url:"https://www.petrobangla.org.bd",description:"State-owned oil, gas, mineral corporation.",tags:["Oil","Gas","Petroleum"],roles:["Business Owner"],industries:["Energy"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"bpdb",name:"BPDB — Power Development Board",category:"Energy",subcategory:"Power",type:"Government Authority",priority:"Medium",url:"https://www.bpdb.gov.bd",description:"State power generation and distribution.",tags:["Power","Electricity","BPDB"],roles:["Business Owner"],industries:["Energy","Power"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        // ===== ENVIRONMENT =====
+        {id:"doe",name:"Department of Environment (DoE)",category:"Environment",subcategory:"Environmental Compliance",type:"Government Authority",priority:"Critical",url:"https://www.doe.gov.bd",description:"Environmental clearance certificates (ECC), environmental laws, pollution control.",tags:["Environment","ECC","Clearance","Pollution","Compliance"],roles:["Compliance Officer","Business Owner","Manufacturer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"env-conservation",name:"Environment Conservation Act 1995",category:"Environment",subcategory:"Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Primary environmental legislation.",tags:["Environment","Law","Conservation","Act"],roles:["Legal Professional","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        // ===== INTELLECTUAL PROPERTY =====
+        {id:"dpdt",name:"DPDT — Patents, Designs and Trademarks",category:"Intellectual Property",subcategory:"IP Registry",type:"Government Authority",priority:"High",url:"https://www.dpdt.gov.bd",description:"Trademark, patent, design registration.",tags:["Trademark","Patent","Design","IP","Registration"],roles:["Legal Professional","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"copyright-bd",name:"Copyright Office Bangladesh",category:"Intellectual Property",subcategory:"Copyright",type:"Government Authority",priority:"Medium",url:"https://www.copyrightoffice.gov.bd",description:"Copyright registration in Bangladesh.",tags:["Copyright","IP","Registration"],roles:["Legal Professional","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:false,frequency:"as-needed"},
+        {id:"wipo",name:"WIPO — World Intellectual Property Organization",category:"Intellectual Property",subcategory:"International",type:"Standard Setter",priority:"Medium",url:"https://www.wipo.int",description:"International IP protection.",tags:["IP","WIPO","International"],roles:["Legal Professional"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"as-needed"},
+        // ===== LAND & PROPERTY =====
+        {id:"rajuk",name:"RAJUK — Capital Development Authority",category:"Land & Property",subcategory:"Development Authority",type:"Government Authority",priority:"High",url:"https://www.rajuk.gov.bd",description:"Urban planning, building permits, land development in Dhaka.",tags:["RAJUK","Urban Planning","Building Permit","Dhaka"],roles:["Business Owner","Real Estate Professional"],industries:["Real Estate","Construction"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"land-records",name:"Directorate of Land Records and Surveys",category:"Land & Property",subcategory:"Land Records",type:"Government Authority",priority:"Medium",url:"https://dlrs.gov.bd",description:"Land records, surveys, maps.",tags:["Land","Records","Survey"],roles:["Legal Professional","Business Owner"],industries:["Real Estate"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        // ===== PROCUREMENT =====
+        {id:"egp",name:"e-GP — National e-Procurement Portal",category:"Procurement",subcategory:"E-Procurement",type:"E-Service",priority:"Critical",url:"https://www.eprocure.gov.bd",description:"Government procurement — tenders, contracts.",tags:["Procurement","Tender","e-GP","Government","Contract"],roles:["Business Owner","Contractor","Supplier"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Filing Portal",verified:true,frequency:"daily"},
+        {id:"bppa",name:"BPPA — Public Procurement Authority",category:"Procurement",subcategory:"Authority",type:"Government Authority",priority:"High",url:"https://www.bppa.gov.bd",description:"Public procurement policy, regulations, e-GP oversight.",tags:["Procurement","BPPA","Policy","Regulation"],roles:["Business Owner","Contractor","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"ppa-2006",name:"Public Procurement Act 2006",category:"Procurement",subcategory:"Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Public procurement legislation.",tags:["Procurement","Law","Act","PPA"],roles:["Legal Professional","Contractor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        // ===== STATISTICS =====
+        {id:"bbs",name:"Bangladesh Bureau of Statistics (BBS)",category:"Statistics",subcategory:"National Statistics",type:"Government Authority",priority:"Critical",url:"https://www.bbs.gov.bd",description:"GDP, census, inflation, trade statistics, labour statistics.",tags:["Statistics","BBS","GDP","Census","Inflation","Economic Data"],roles:["Economist","CFO","Analyst","Auditor"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Statistical Database",verified:true,frequency:"monthly"},
+        // ===== AML / CFT =====
+        {id:"bfius",name:"BFIU — Financial Intelligence Unit",category:"AML/CFT",subcategory:"Financial Intelligence",type:"Government Authority",priority:"Critical",url:"https://www.bb.org.bd/en/index.php/bfiu-unit",description:"AML/CFT monitoring, STR/CTR reporting.",tags:["AML","CFT","BFIU","STR","CTR"],roles:["Compliance Officer","Banker","Auditor"],industries:["Banking","Finance","Insurance"],jurisdiction:"Bangladesh Official",resourceType:"Government Authority",verified:true,frequency:"weekly"},
+        {id:"mlpa-2012",name:"Money Laundering Prevention Act 2012",category:"AML/CFT",subcategory:"Law",type:"Law Database",priority:"High",url:"https://bdlaws.minlaw.gov.bd",description:"Primary AML legislation.",tags:["AML","Money Laundering","Law","Act"],roles:["Compliance Officer","Legal Professional","Banker"],industries:["Banking","Finance"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        {id:"fatf",name:"FATF — Financial Action Task Force",category:"AML/CFT",subcategory:"International",type:"Standard Setter",priority:"High",url:"https://www.fatf-gafi.org",description:"International AML/CFT standards.",tags:["AML","CFT","FATF","International"],roles:["Compliance Officer","Banker"],industries:["Banking","Finance"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        // ===== ESG =====
+        {id:"issb",name:"ISSB — Sustainability Standards Board",category:"ESG",subcategory:"Sustainability Standards",type:"Standard Setter",priority:"High",url:"https://www.ifrs.org/groups/international-sustainability-standards-board/",description:"IFRS S1 and S2 sustainability disclosure standards.",tags:["ESG","Sustainability","ISSB","IFRS S1","Climate"],roles:["CFO","Auditor","Compliance Officer"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"bsec-esg",name:"BSEC — ESG Reporting Guidelines",category:"ESG",subcategory:"ESG Reporting",type:"Regulation",priority:"High",url:"https://sec.gov.bd",description:"ESG reporting for listed companies.",tags:["ESG","Sustainability","Reporting","Listed Company"],roles:["CFO","Company Secretary","Compliance Officer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Regulation",verified:true,frequency:"as-needed"},
+        // ===== PROFESSIONAL BODIES =====
+        {id:"fbcci",name:"FBCCI",category:"Professional Bodies",subcategory:"Chamber",type:"Industry Association",priority:"High",url:"https://www.fbcci.org.bd",description:"Apex trade body representing all chambers and associations.",tags:["FBCCI","Chamber","Commerce","Industry"],roles:["Business Owner","Entrepreneur"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Industry Association",verified:true,frequency:"monthly"},
+        {id:"dcci",name:"DCCI — Dhaka Chamber of Commerce",category:"Professional Bodies",subcategory:"Chamber",type:"Industry Association",priority:"High",url:"https://www.dcci.org.bd",description:"Major Dhaka chamber of commerce.",tags:["DCCI","Chamber","Commerce","Dhaka"],roles:["Business Owner","Entrepreneur"],industries:["All"],jurisdiction:"Bangladesh Professional",resourceType:"Industry Association",verified:true,frequency:"monthly"},
+        // ===== NGO =====
+        {id:"ngoab",name:"NGO Affairs Bureau",category:"NGO",subcategory:"NGO Regulation",type:"Government Authority",priority:"High",url:"https://www.ngoab.gov.bd",description:"NGO regulation, foreign donation approval.",tags:["NGO","Non-Profit","Foreign Donation","Registration"],roles:["NGO Professional","Compliance Officer"],industries:["NGO"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"monthly"},
+        {id:"societies-act",name:"Societies Registration Act 1860",category:"NGO",subcategory:"Law",type:"Law Database",priority:"Medium",url:"https://bdlaws.minlaw.gov.bd",description:"Registration of societies (non-profit).",tags:["Society","NGO","Registration","Law"],roles:["NGO Professional","Legal Professional"],industries:["NGO"],jurisdiction:"Bangladesh Official",resourceType:"Law Database",verified:true,frequency:"as-needed"},
+        // ===== E-SERVICES =====
+        {id:"a2i",name:"a2i — Digital Government",category:"E-Services",subcategory:"Digital Government",type:"Government Portal",priority:"High",url:"https://a2i.gov.bd",description:"Digital transformation and e-government services.",tags:["Digital","e-Government","a2i"],roles:["All"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Government Portal",verified:true,frequency:"monthly"},
+        {id:"porichoy",name:"Porichoy — NID Verification",category:"E-Services",subcategory:"Identity",type:"E-Service",priority:"Medium",url:"https://porichoy.gov.bd",description:"NID verification service.",tags:["NID","Identity","Verification"],roles:["Business Owner","HR Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"E-Service",verified:true,frequency:"as-needed"},
+        {id:"epassport",name:"Bangladesh e-Passport Portal",category:"E-Services",subcategory:"Passport",type:"E-Service",priority:"Medium",url:"https://epassport.gov.bd",description:"Online passport application.",tags:["Passport","Travel"],roles:["All"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"E-Service",verified:true,frequency:"as-needed"},
+        // ===== COMPLIANCE =====
+        {id:"trade-license",name:"City Corporation — Trade License",category:"Compliance",subcategory:"Starting a Business",type:"Government Authority",priority:"High",url:"https://www.bangladesh.gov.bd",description:"Trade license from City Corporation or Municipality.",tags:["Trade License","City Corporation"],roles:["Business Owner","Entrepreneur"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Government Authority",verified:true,frequency:"annual"},
+        {id:"fire-license",name:"Fire Service and Civil Defence",category:"Compliance",subcategory:"License",type:"Government Authority",priority:"High",url:"https://www.fireservice.gov.bd",description:"Fire safety license and compliance.",tags:["Fire","Safety","License"],roles:["Business Owner","Compliance Officer","Manufacturer"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"as-needed"},
+        {id:"competition",name:"Bangladesh Competition Commission",category:"Compliance",subcategory:"Competition",type:"Government Authority",priority:"Medium",url:"https://www.ccb.gov.bd",description:"Competition law enforcement.",tags:["Competition","Antitrust","Market"],roles:["Legal Professional","Business Owner"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:false,frequency:"quarterly"},
+        {id:"consumer",name:"DNCRP — Consumer Rights Protection",category:"Compliance",subcategory:"Consumer Protection",type:"Government Authority",priority:"Medium",url:"https://dncrp.gov.bd",description:"Consumer protection and complaints.",tags:["Consumer","Protection","Rights"],roles:["Business Owner","Legal Professional"],industries:["All"],jurisdiction:"Bangladesh Official",resourceType:"Official Website",verified:true,frequency:"quarterly"},
+        // ===== INTERNATIONAL =====
+        {id:"ifrs",name:"IFRS Foundation",category:"International",subcategory:"Accounting Standards",type:"Standard Setter",priority:"Critical",url:"https://www.ifrs.org",description:"IFRS Accounting Standards (IFRS/IAS).",tags:["IFRS","IAS","Accounting Standards","International"],roles:["Chartered Accountant","Auditor","Accountant","CFO"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"iasb",name:"IASB — International Accounting Standards Board",category:"International",subcategory:"Accounting Standards",type:"Standard Setter",priority:"Critical",url:"https://www.ifrs.org/groups/international-accounting-standards-board/",description:"Sets IFRS Accounting Standards.",tags:["IASB","IFRS","Accounting Standards"],roles:["Chartered Accountant","Auditor","Accountant","CFO"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"iaasb",name:"IAASB — Auditing Standards Board",category:"International",subcategory:"Audit Standards",type:"Standard Setter",priority:"Critical",url:"https://www.iaasb.org",description:"International Standards on Auditing (ISA).",tags:["ISA","IAASB","Audit Standards"],roles:["Chartered Accountant","Auditor"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"ifac",name:"IFAC — International Federation of Accountants",category:"International",subcategory:"Professional Body",type:"Professional Body",priority:"High",url:"https://www.ifac.org",description:"Global accountancy profession organization.",tags:["IFAC","Accountancy","Professional"],roles:["Chartered Accountant","Auditor","Accountant"],industries:["All"],jurisdiction:"International",resourceType:"Professional Body",verified:true,frequency:"monthly"},
+        {id:"iesba",name:"IESBA — Ethics Standards Board",category:"International",subcategory:"Ethics",type:"Standard Setter",priority:"High",url:"https://www.ethicsboard.org",description:"International Code of Ethics for Accountants.",tags:["Ethics","IESBA","Code of Ethics"],roles:["Chartered Accountant","Auditor"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"ipsasb",name:"IPSASB — Public Sector Standards",category:"International",subcategory:"Public Sector",type:"Standard Setter",priority:"Medium",url:"https://www.ipsasb.org",description:"Public sector accounting standards.",tags:["IPSAS","Public Sector","Government Accounting"],roles:["Accountant","Auditor"],industries:["All"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"worldbank",name:"World Bank — Bangladesh",category:"International",subcategory:"Development",type:"International Organization",priority:"High",url:"https://www.worldbank.org/en/country/bangladesh",description:"Projects, data, publications for Bangladesh.",tags:["World Bank","Development","Data"],roles:["Economist","CFO","Business Owner"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"imf",name:"IMF — International Monetary Fund",category:"International",subcategory:"Economy",type:"International Organization",priority:"High",url:"https://www.imf.org/en/Countries/BGD",description:"Economic assessments, data, programs.",tags:["IMF","Economy","Fiscal","Monetary"],roles:["Economist","CFO"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"adb",name:"ADB — Asian Development Bank",category:"International",subcategory:"Development",type:"International Organization",priority:"High",url:"https://www.adb.org/countries/bangladesh/main",description:"ADB projects, data for Bangladesh.",tags:["ADB","Development","Asia"],roles:["Economist","CFO"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"oecd",name:"OECD",category:"International",subcategory:"Economy",type:"International Organization",priority:"Medium",url:"https://www.oecd.org",description:"Tax, transfer pricing, economic policy.",tags:["OECD","Transfer Pricing","Tax","Economy"],roles:["Tax Practitioner","CFO","Economist"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"wto",name:"WTO — World Trade Organization",category:"International",subcategory:"Trade",type:"International Organization",priority:"High",url:"https://www.wto.org",description:"Global trade rules and agreements.",tags:["WTO","Trade","International"],roles:["Importer","Exporter","Legal Professional"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"ilo",name:"ILO — International Labour Organization",category:"International",subcategory:"Labour",type:"International Organization",priority:"High",url:"https://www.ilo.org",description:"International labour standards and conventions.",tags:["ILO","Labour","International","Standards"],roles:["HR Professional","Legal Professional","Compliance Officer"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"bis",name:"BIS — Bank for International Settlements",category:"International",subcategory:"Banking",type:"International Organization",priority:"High",url:"https://www.bis.org",description:"Central bank organization — Basel standards.",tags:["BIS","Basel","Central Bank","Banking"],roles:["Banker","CFO","Compliance Officer"],industries:["Banking"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"iosco",name:"IOSCO — Securities Commissions",category:"International",subcategory:"Capital Market",type:"International Organization",priority:"Medium",url:"https://www.iosco.org",description:"International securities regulation.",tags:["IOSCO","Securities","Capital Market"],roles:["Investment Professional","CFO"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"},
+        {id:"basel",name:"Basel Committee on Banking Supervision",category:"International",subcategory:"Banking Standards",type:"Standard Setter",priority:"High",url:"https://www.bis.org/bcbs/",description:"Global banking supervision standards (Basel I, II, III).",tags:["Basel","Banking","Supervision","Capital Adequacy"],roles:["Banker","CFO","Compliance Officer"],industries:["Banking"],jurisdiction:"International",resourceType:"Standard Setter",verified:true,frequency:"quarterly"},
+        {id:"un",name:"United Nations",category:"International",subcategory:"Global",type:"International Organization",priority:"Medium",url:"https://www.un.org",description:"SDGs, development programs, international standards.",tags:["UN","International","SDG"],roles:["All"],industries:["All"],jurisdiction:"International",resourceType:"International Organization",verified:true,frequency:"quarterly"}
+    ];
+
+    /* =========================================================
+       APPLICATION LOGIC
+       ========================================================= */
+    const ROLES = ["Business Owner","Entrepreneur","Accountant","Chartered Accountant","Auditor","Tax Practitioner","Finance Manager","CFO","Company Secretary","Internal Auditor","Compliance Officer","HR Professional","Legal Professional","Banker","Insurance Professional","Investment Professional","Importer","Exporter","Manufacturer","NGO Professional","IT Professional","Economist","Analyst","Contractor","Supplier","Director","Customs Agent","FinTech Professional","ESG Professional","Education Professional","Healthcare Professional","Real Estate Professional"];
+    const INDUSTRIES = ["All","Banking","Finance","Insurance","Garments","Textile","Manufacturing","Pharmaceuticals","Healthcare","ICT","Telecom","Software","Energy","Power","Shipping","Logistics","Real Estate","Construction","Education","NGO","SME","Food","Consumer Goods","Industrial","Aviation"];
+    const CATEGORIES = [...new Set(resources.map(r => r.category))];
+    const TYPES = [...new Set(resources.map(r => r.type))];
+    let currentPage = 'dashboard';
+    let currentCategory = '';
+    let currentRole = '';
+    let currentIndustry = '';
+    let filteredResources = [];
+
+    // --- LocalStorage Helpers ---
+    function getFavs() { return JSON.parse(localStorage.getItem('bdportal_favs') || '[]'); }
+    function setFavs(f) { localStorage.setItem('bdportal_favs', JSON.stringify(f)); updateFavCount(); }
+    function getRecent() { return JSON.parse(localStorage.getItem('bdportal_recent') || '[]'); }
+    function setRecent(r) { localStorage.setItem('bdportal_recent', JSON.stringify(r)); }
+    function getTheme() { return localStorage.getItem('bdportal_theme') || 'light'; }
+    function setTheme(t) { localStorage.setItem('bdportal_theme', t); }
+    function isFav(id) { return getFavs().includes(id); }
+    function toggleFav(id) {
+        let f = getFavs();
+        if (f.includes(id)) f = f.filter(x => x !== id);
+        else f.push(id);
+        setFavs(f);
+        renderCurrentPage();
+    }
+    function addRecent(id) {
+        let r = getRecent().filter(x => x.id !== id);
+        r.unshift({ id, time: Date.now() });
+        if (r.length > 30) r = r.slice(0, 30);
+        setRecent(r);
+    }
+    function clearHistory() { setRecent([]); renderCurrentPage(); }
+    function updateFavCount() {
+        const el = document.getElementById('favCount');
+        if (el) el.textContent = getFavs().length;
+    }
+
+    // --- Theme ---
+    function toggleTheme() {
+        const t = getTheme() === 'light' ? 'dark' : 'light';
+        setTheme(t);
+        applyTheme();
+    }
+    function applyTheme() {
+        document.documentElement.setAttribute('data-theme', getTheme());
+        const btn = document.getElementById('themeBtn');
+        if (btn) btn.textContent = getTheme() === 'light' ? '◐' : '◑';
+    }
+
+    // --- Sidebar ---
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    // --- Navigation ---
+    function navigateTo(page, param) {
+        currentPage = page;
+        document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        const sl = document.querySelector(`.sidebar-link[data-page="${param || page}"]`);
+        if (sl) sl.classList.add('active');
+        document.getElementById('sidebar').classList.remove('open');
+        switch(page) {
+            case 'dashboard': renderDashboard(); break;
+            case 'category': currentCategory = param; renderCategory(); break;
+            case 'search': break; // handled by search
+            case 'favorites': renderFavorites(); break;
+            case 'recent': renderRecent(); break;
+            case 'watchlist': renderWatchlist(); break;
+            case 'whatdoineed': renderWhatDoINeed(); break;
+            case 'quickaccess': renderQuickAccessFull(); break;
+            case 'dailycheck': renderDailyCheck(); break;
+            case 'role': currentRole = param; renderRoleView(); break;
+            case 'industry': currentIndustry = param; renderIndustryView(); break;
+        }
+        window.scrollTo(0, 0);
+    }
+
+    // --- Card Rendering ---
+    function renderCard(r) {
+        const fav = isFav(r.id);
+        const pClass = r.priority === 'Critical' ? 'priority-critical' : r.priority === 'High' ? 'priority-high' : r.priority === 'Medium' ? 'priority-medium' : 'priority-reference';
+        const pIcon = r.priority === 'Critical' ? '🔴' : r.priority === 'High' ? '🟠' : r.priority === 'Medium' ? '🟡' : '🔵';
+        const tags = (r.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('');
+        return `<div class="resource-card" data-id="${r.id}">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">${r.name}</div>
+                    <div class="card-type">${r.type}${r.subcategory ? ' — '+r.subcategory : ''}</div>
+                </div>
+                <span class="priority-badge ${pClass}">${pIcon} ${r.priority}</span>
+            </div>
+            <div class="card-desc">${r.description}</div>
+            <div class="card-tags">${tags}</div>
+            <div class="card-actions">
+                <a class="btn-open" href="${r.url}" target="_blank" rel="noopener noreferrer" onclick="addRecent('${r.id}')">Open Website ↗</a>
+                <button class="btn-fav ${fav?'active':''}" onclick="event.stopPropagation();toggleFav('${r.id}')" aria-label="Favorite">${fav?'★':'☆'}</button>
+                <button class="btn-action" onclick="event.stopPropagation();showDetail('${r.id}')" style="padding:7px 10px;font-size:12px;">ⓘ</button>
+            </div>
+        </div>`;
+    }
+
+    // --- Dashboard ---
+    function renderDashboard() {
+        document.getElementById('page-dashboard').classList.add('active');
+        const total = resources.length;
+        const critical = resources.filter(r => r.priority === 'Critical').length;
+        const govt = resources.filter(r => r.type === 'Government Authority' || r.type === 'Government Portal').length;
+        const reg = resources.filter(r => ['Regulator','Standard Setter','Judicial'].includes(r.type)).length;
+        const acc = resources.filter(r => ['Accounting & Audit','Professional Bodies'].includes(r.category)).length;
+        const tax = resources.filter(r => ['Taxation','VAT','Customs'].includes(r.category)).length;
+        const intl = resources.filter(r => r.jurisdiction === 'International').length;
+        const favs = getFavs().length;
+        const recent = getRecent().length;
+        document.getElementById('statsGrid').innerHTML = [
+            ['Total Resources', total], ['Critical', critical], ['Government', govt],
+            ['Regulatory', reg], ['Accounting/Audit', acc], ['Tax/VAT/Customs', tax],
+            ['International', intl], ['Favorites', favs], ['Recent', recent]
+        ].map(([l, v]) => `<div class="stat-card"><div class="stat-value">${v}</div><div class="stat-label">${l}</div></div>`).join('');
+
+        // Quick access
+        const qa = resources.filter(r => r.priority === 'Critical').slice(0, 12);
+        document.getElementById('quickAccessGrid').innerHTML = qa.map(r => `<a class="quick-item" onclick="addRecent('${r.id}')" href="${r.url}" target="_blank" rel="noopener noreferrer"><div class="qi-icon">${r.name.charAt(0)}</div><div>${r.name.length > 22 ? r.name.substring(0,22)+'...' : r.name}</div></a>`).join('');
+
+        // Watchlist preview
+        const watch = getWatchlistItems().slice(0, 6);
+        document.getElementById('watchlistPreview').innerHTML = watch.map(w => `<a class="watchlist-item" href="${w.url}" target="_blank" rel="noopener noreferrer" onclick="addRecent('${w.id}')"><div class="wl-dot"></div><div class="wl-info"><div class="wl-title">${w.name}</div><div class="wl-sub">${w.sub}</div></div></a>`).join('');
+
+        // Role pills
+        document.getElementById('rolePills').innerHTML = ROLES.slice(0,16).map(r => `<span class="pill" onclick="navigateTo('role','${r}')">${r}</span>`).join('');
+
+        // Industry pills
+        document.getElementById('industryPills').innerHTML = INDUSTRIES.filter(i => i !== 'All').slice(0,16).map(i => `<span class="pill" onclick="navigateTo('industry','${i}')">${i}</span>`).join('');
+
+        // Category pills
+        document.getElementById('categoryPills').innerHTML = CATEGORIES.map(c => {
+            const count = resources.filter(r => r.category === c).length;
+            return `<span class="pill" onclick="navigateTo('category','${c}')">${c} (${count})</span>`;
+        }).join('');
+    }
+
+    // --- Category ---
+    function renderCategory() {
+        document.getElementById('page-category').classList.add('active');
+        document.getElementById('categoryTitle').textContent = currentCategory;
+        document.getElementById('breadcrumbCategory').textContent = currentCategory;
+        filteredResources = resources.filter(r => r.category === currentCategory);
+        // Populate type filter
+        const types = [...new Set(filteredResources.map(r => r.type))];
+        const typeFilter = document.getElementById('filterType');
+        typeFilter.innerHTML = '<option value="">All Types</option>' + types.map(t => `<option value="${t}">${t}</option>`).join('');
+        applyFilters();
+    }
+
+    function applyFilters() {
+        const pFilter = document.getElementById('filterPriority').value;
+        const tFilter = document.getElementById('filterType').value;
+        const jFilter = document.getElementById('filterJurisdiction').value;
+        let results = filteredResources;
+        if (pFilter) results = results.filter(r => r.priority === pFilter);
+        if (tFilter) results = results.filter(r => r.type === tFilter);
+        if (jFilter) results = results.filter(r => r.jurisdiction === jFilter);
+        document.getElementById('categorySubtitle').textContent = `${results.length} resources`;
+        document.getElementById('resultCount').textContent = `Showing ${results.length} of ${filteredResources.length} resources`;
+        const container = document.getElementById('categoryCards');
+        const empty = document.getElementById('emptyState');
+        if (results.length === 0) {
+            container.innerHTML = '';
+            empty.style.display = 'block';
+        } else {
+            empty.style.display = 'none';
+            container.innerHTML = results.map(renderCard).join('');
+        }
+    }
+    function clearFilters() {
+        document.getElementById('filterPriority').value = '';
+        document.getElementById('filterType').value = '';
+        document.getElementById('filterJurisdiction').value = '';
+        applyFilters();
+    }
+
+    // --- Search ---
+    let searchTimeout;
+    function handleSearch(query) {
+        clearTimeout(searchTimeout);
+        if (!query.trim()) {
+            if (currentPage === 'search') navigateTo('dashboard');
+            return;
+        }
+        searchTimeout = setTimeout(() => {
+            const q = query.toLowerCase();
+            const results = resources.filter(r => {
+                const searchable = [r.name, r.description, r.category, r.subcategory, r.type, r.jurisdiction, r.resourceType, ...(r.tags||[]), ...(r.roles||[]), ...(r.industries||[])].join(' ').toLowerCase();
+                return searchable.includes(q);
+            });
+            currentPage = 'search';
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-search').classList.add('active');
+            document.getElementById('searchSubtitle').textContent = `Results for "${query}"`;
+            document.getElementById('searchResultCount').textContent = `${results.length} resources found`;
+            const container = document.getElementById('searchCards');
+            const empty = document.getElementById('searchEmpty');
+            if (results.length === 0) { container.innerHTML = ''; empty.style.display = 'block'; }
+            else { empty.style.display = 'none'; container.innerHTML = results.map(renderCard).join(''); }
+        }, 200);
+    }
+
+    // --- Favorites ---
+    function renderFavorites() {
+        document.getElementById('page-favorites').classList.add('active');
+        const favs = getFavs();
+        const items = resources.filter(r => favs.includes(r.id));
+        const container = document.getElementById('favCards');
+        const empty = document.getElementById('favEmpty');
+        if (items.length === 0) { container.innerHTML = ''; empty.style.display = 'block'; }
+        else { empty.style.display = 'none'; container.innerHTML = items.map(renderCard).join(''); }
+    }
+
+    // --- Recent ---
+    function renderRecent() {
+        document.getElementById('page-recent').classList.add('active');
+        const recent = getRecent();
+        const items = recent.map(r => resources.find(x => x.id === r.id)).filter(Boolean);
+        const container = document.getElementById('recentCards');
+        const empty = document.getElementById('recentEmpty');
+        if (items.length === 0) { container.innerHTML = ''; empty.style.display = 'block'; }
+        else { empty.style.display = 'none'; container.innerHTML = items.map(renderCard).join(''); }
+    }
+
+    // --- Watchlist ---
+    function getWatchlistItems() {
+        const watchIds = ['nbr-sro','bb-circulars','bb-fe','bsec-notices','frc','rjsc','gazette','idra','icab','vat-sro','molabour','doe'];
+        return resources.filter(r => watchIds.includes(r.id)).map(r => ({
+            id: r.id, name: r.name, url: r.url, sub: r.subcategory + ' — ' + r.type
+        }));
+    }
+    function renderWatchlist() {
+        document.getElementById('page-watchlist').classList.add('active');
+        const items = getWatchlistItems();
+        document.getElementById('fullWatchlist').innerHTML = items.map(w => `<a class="watchlist-item" href="${w.url}" target="_blank" rel="noopener noreferrer" onclick="addRecent('${w.id}')"><div class="wl-dot"></div><div class="wl-info"><div class="wl-title">${w.name}</div><div class="wl-sub">${w.sub}</div></div></a>`).join('');
+    }
+
+    // --- What Do I Need ---
+    const TASKS = [
+        {icon:'🏢',label:'Start a Business',ids:['rjsc','nbr-etin','vat-online','bida','trade-license','fire-license','doe','dol']},
+        {icon:'📝',label:'Register a Company',ids:['rjsc','rjsc-portal','company-act']},
+        {icon:'💰',label:'File Income Tax Return',ids:['nbr-ereturn','nbr-etin','nbr-incometax']},
+        {icon:'📋',label:'File VAT Return',ids:['vat-online','vat-mushak','vat-sro']},
+        {icon:'📦',label:'Import Goods',ids:['customs-bd','cciande','customs-asyCUDA','customs-tariff']},
+        {icon:'🚢',label:'Export Goods',ids:['customs-bd','cciande','epb','customs-bond']},
+        {icon:'👷',label:'Hire Employees',ids:['molabour','dol','labour-act','labour-rules']},
+        {icon:'📜',label:'Obtain Industry License',ids:['bida','bida-oss','dgda','btrc','bsti']},
+        {icon:'©',label:'Register a Trademark',ids:['dpdt','wipo']},
+        {icon:'📊',label:'Prepare Financial Statements',ids:['icab','icab-standards','ifrs','frc']},
+        {icon:'🔍',label:'Conduct an Audit',ids:['icab','icab-standards','iaasb','frc']},
+        {icon:'📖',label:'Check Accounting Standards',ids:['icab-standards','ifrs','iasb','frc']},
+        {icon:'✓',label:'Check Audit Standards',ids:['icab-standards','iaasb','iesba']},
+        {icon:'🏦',label:'Check BB Circulars',ids:['bb','bb-circulars','bb-fe']},
+        {icon:'🛡',label:'Check Insurance Regulations',ids:['idra','insurance-act']},
+        {icon:'📈',label:'Check Capital Market Regulations',ids:['bsec','bsec-notices','dse']},
+        {icon:'🌱',label:'ESG / Sustainability Reporting',ids:['issb','bsec-esg','doe']},
+        {icon:'🔒',label:'AML/CFT Compliance',ids:['bfius','mlpa-2012','fatf','bb-bfiu']},
+    ];
+    function renderWhatDoINeed() {
+        document.getElementById('page-whatdoineed').classList.add('active');
+        document.getElementById('taskGrid').innerHTML = TASKS.map((t, i) => `<div class="task-item" onclick="showTaskResults(${i})"><div class="task-icon">${t.icon}</div><div class="task-label">${t.label}</div></div>`).join('');
+        document.getElementById('taskResults').innerHTML = '';
+    }
+    function showTaskResults(idx) {
+        const task = TASKS[idx];
+        const items = task.ids.map(id => resources.find(r => r.id === id)).filter(Boolean);
+        document.getElementById('taskResults').innerHTML = `<h3 style="margin:16px 0 12px;font-size:16px;">${task.icon} ${task.label} — Relevant Resources</h3><div class="cards-grid">${items.map(renderCard).join('')}</div>`;
+    }
+
+    // --- Quick Access Full ---
+    function renderQuickAccessFull() {
+        document.getElementById('page-quickaccess').classList.add('active');
+        const items = resources.filter(r => r.priority === 'Critical');
+        document.getElementById('quickAccessFull').innerHTML = items.map(renderCard).join('');
+    }
+
+    // --- Daily Check ---
+    function renderDailyCheck() {
+        document.getElementById('page-dailycheck').classList.add('active');
+        const daily = ['bb-circulars','bb-fe','nbr-sro','nbr-incometax','customs-bd'];
+        const weekly = ['bsec-notices','frc','rjsc','idra','icab','gazette','vat-sro','molabour','dol'];
+        const monthly = ['bbs','bb-stats','bb-monetary','doe','btrc','bsti'];
+        const makeList = (ids) => ids.map(id => {
+            const r = resources.find(x => x.id === id);
+            if (!r) return '';
+            return `<a class="watchlist-item" href="${r.url}" target="_blank" rel="noopener noreferrer" onclick="addRecent('${r.id}')"><div class="wl-dot"></div><div class="wl-info"><div class="wl-title">${r.name}</div><div class="wl-sub">${r.category} — ${r.subcategory}</div></div></a>`;
+        }).join('');
+        document.getElementById('dailyWatch').innerHTML = makeList(daily);
+        document.getElementById('weeklyWatch').innerHTML = makeList(weekly);
+        document.getElementById('monthlyWatch').innerHTML = makeList(monthly);
+    }
+
+    // --- Role View ---
+    function renderRoleView() {
+        document.getElementById('page-role').classList.add('active');
+        document.getElementById('roleTitle').textContent = currentRole;
+        document.getElementById('breadcrumbRole').textContent = currentRole;
+        document.getElementById('roleSubtitle').textContent = `Resources relevant to ${currentRole}`;
+        const items = resources.filter(r => r.roles.includes(currentRole) || r.roles.includes('All'));
+        document.getElementById('roleCards').innerHTML = items.map(renderCard).join('');
+    }
+
+    // --- Industry View ---
+    function renderIndustryView() {
+        document.getElementById('page-industry').classList.add('active');
+        document.getElementById('industryTitle').textContent = currentIndustry;
+        document.getElementById('breadcrumbIndustry').textContent = currentIndustry;
+        document.getElementById('industrySubtitle').textContent = `Resources for the ${currentIndustry} industry`;
+        const items = resources.filter(r => r.industries.includes(currentIndustry) || r.industries.includes('All'));
+        document.getElementById('industryCards').innerHTML = items.map(renderCard).join('');
+    }
+
+    // --- Detail Modal ---
+    function showDetail(id) {
+        const r = resources.find(x => x.id === id);
+        if (!r) return;
+        document.getElementById('modalTitle').textContent = r.name;
+        document.getElementById('modalType').textContent = `${r.type} — ${r.category}${r.subcategory ? ' / '+r.subcategory : ''}`;
+        document.getElementById('modalOpen').href = r.url;
+        const fav = isFav(r.id);
+        document.getElementById('modalFav').textContent = fav ? '★' : '☆';
+        document.getElementById('modalFav').classList.toggle('active', fav);
+        document.getElementById('modalFav').setAttribute('data-id', r.id);
+        const pClass = r.priority === 'Critical' ? 'priority-critical' : r.priority === 'High' ? 'priority-high' : r.priority === 'Medium' ? 'priority-medium' : 'priority-reference';
+        document.getElementById('modalBody').innerHTML = `
+            <div class="detail-row"><div class="detail-label">Organization</div><div class="detail-value">${r.name}</div></div>
+            <div class="detail-row"><div class="detail-label">Description</div><div class="detail-value">${r.description}</div></div>
+            <div class="detail-row"><div class="detail-label">Category</div><div class="detail-value">${r.category}</div></div>
+            <div class="detail-row"><div class="detail-label">Subcategory</div><div class="detail-value">${r.subcategory || '—'}</div></div>
+            <div class="detail-row"><div class="detail-label">Type</div><div class="detail-value">${r.type}</div></div>
+            <div class="detail-row"><div class="detail-label">Resource Type</div><div class="detail-value">${r.resourceType}</div></div>
+            <div class="detail-row"><div class="detail-label">Priority</div><div class="detail-value"><span class="priority-badge ${pClass}">${r.priority}</span></div></div>
+            <div class="detail-row"><div class="detail-label">Jurisdiction</div><div class="detail-value">${r.jurisdiction}</div></div>
+            <div class="detail-row"><div class="detail-label">Roles</div><div class="detail-value">${(r.roles||[]).join(', ')}</div></div>
+            <div class="detail-row"><div class="detail-label">Industries</div><div class="detail-value">${(r.industries||[]).join(', ')}</div></div>
+            <div class="detail-row"><div class="detail-label">Tags</div><div class="detail-value">${(r.tags||[]).join(', ')}</div></div>
+            <div class="detail-row"><div class="detail-label">Verified</div><div class="detail-value">${r.verified ? '✓ Verified (August 2026)' : '⚠ Needs Review'}</div></div>
+            <div class="detail-row"><div class="detail-label">Suggested Check</div><div class="detail-value">${r.frequency || '—'}</div></div>
+            <div class="detail-row"><div class="detail-label">URL</div><div class="detail-value"><a href="${r.url}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${r.url}</a></div></div>
+        `;
+        document.getElementById('modal').classList.add('active');
+    }
+    function closeModal() { document.getElementById('modal').classList.remove('active'); }
+    function toggleFavFromModal() {
+        const id = document.getElementById('modalFav').getAttribute('data-id');
+        toggleFav(id);
+        const fav = isFav(id);
+        document.getElementById('modalFav').textContent = fav ? '★' : '☆';
+        document.getElementById('modalFav').classList.toggle('active', fav);
+    }
+
+    // --- Open All Visible ---
+    function openAllVisible() {
+        const cards = document.querySelectorAll('.page-section.active .resource-card');
+        if (cards.length === 0) return;
+        if (!confirm(`You are about to open ${cards.length} websites in new tabs. Continue?`)) return;
+        cards.forEach(card => {
+            const id = card.getAttribute('data-id');
+            const r = resources.find(x => x.id === id);
+            if (r) { window.open(r.url, '_blank', 'noopener,noreferrer'); addRecent(r.id); }
+        });
+    }
+
+    // --- Export / Import ---
+    function showExportImport() {
+        const data = {
+            favorites: getFavs(),
+            recent: getRecent(),
+            theme: getTheme(),
+            exportDate: new Date().toISOString()
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'bd-portal-data-' + new Date().toISOString().slice(0,10) + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        // Also offer import
+        setTimeout(() => {
+            if (confirm('Data exported. Would you like to import data from a previous export?')) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        try {
+                            const d = JSON.parse(ev.target.result);
+                            if (d.favorites) setFavs(d.favorites);
+                            if (d.recent) setRecent(d.recent);
+                            if (d.theme) { setTheme(d.theme); applyTheme(); }
+                            alert('Data imported successfully!');
+                            renderCurrentPage();
+                        } catch(err) { alert('Invalid file format.'); }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
+            }
+        }, 500);
+    }
+
+    // --- Keyboard Shortcuts ---
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
+            e.preventDefault();
+            document.getElementById('searchInput').focus();
+        }
+        if (e.key === 'Escape') {
+            closeModal();
+            document.getElementById('searchInput').blur();
+        }
+        if (e.key === 'd' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName) && !e.ctrlKey && !e.metaKey) {
+            navigateTo('dashboard');
+        }
+        if (e.key === 'f' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName) && !e.ctrlKey && !e.metaKey) {
+            navigateTo('favorites');
+        }
+    });
+
+    // --- Render Current Page (for refresh after fav toggle etc) ---
+    function renderCurrentPage() {
+        switch(currentPage) {
+            case 'dashboard': renderDashboard(); break;
+            case 'category': renderCategory(); break;
+            case 'favorites': renderFavorites(); break;
+            case 'recent': renderRecent(); break;
+            case 'watchlist': renderWatchlist(); break;
+            case 'whatdoineed': renderWhatDoINeed(); break;
+            case 'quickaccess': renderQuickAccessFull(); break;
+            case 'dailycheck': renderDailyCheck(); break;
+            case 'role': renderRoleView(); break;
+            case 'industry': renderIndustryView(); break;
+        }
+    }
+
+    // --- Init ---
+    applyTheme();
+    renderDashboard();
+    updateFavCount();
+    </script>
+</body>
+</html>
