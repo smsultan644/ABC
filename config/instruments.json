@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "purpose": "Instrument specifications used by every calculator in this project.",
+    "why_this_file_exists": "Position sizing cannot be done correctly without knowing (a) how many units one lot represents and (b) how big one pip is. Guessing these numbers is one of the most common causes of oversized trades and blown accounts.",
+    "verification_policy": "Values marked \"verified\": true were taken from Exness official documentation on the verification_date shown. Values marked \"verified\": false are industry-typical conventions that you MUST confirm in MetaTrader 5 > Market Watch > right-click symbol > Specification before risking money.",
+    "verified_on": "2026-09-15",
+    "sources": [
+      "https://get.exness.help/hc/en-us/articles/360014740179-Common-trading-terms (lot/contract sizes, pip vs point)",
+      "https://get.exness.help/hc/en-us/articles/17854278192284-Forex (forex contract size 100,000, pip size 0.0001-0.01, max leverage 1:2000 / 1:Unlimited, hedged margin 0%, Triple swap Wed / Thu for USDCAD)",
+      "https://get.exness.help/hc/en-us/articles/17854173039388-Commodities (Gold XAU 100 troy oz, pip 0.01; Silver 5,000 oz; energies 1,000 BBL)",
+      "https://www.exness.com/standard-accounts/ (Standard: margin call 60%, stop out 0%, max lot 200 daytime / 60 night, min lot 0.01)",
+      "https://get.exness.help/hc/en-us/articles/360014693340-Margin-call-and-stop-out-levels-by-account-type (margin call / stop out by account type)"
+    ],
+    "important_warning": "Specifications change. Spreads, maximum lot sizes, leverage caps and swap rules are broker decisions, not laws of nature. Re-verify before every new phase of trading, and re-run `python main.py doctor` afterwards.",
+    "pip_vs_point_warning": "Exness contract-specification tables quote spreads in POINTS (MT4/MT5 'points'), where 1 pip = 10 points for a 5-digit pair. 'Spread from 0.2 pips' on the marketing page still means 0.2 in the platform's point convention for some tables. Always read the live Spread column in Market Watch and convert it yourself with this package before assuming a cost."
+  },
+
+  "defaults": {
+    "min_volume_lots": 0.01,
+    "volume_step_lots": 0.01,
+    "min_volume_before_rounding": 0.0
+  },
+
+  "instruments": {
+    "EURUSD": {"name": "Euro vs US Dollar", "group": "forex_major", "base": "EUR", "quote": "USD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+    "GBPUSD": {"name": "British Pound vs US Dollar", "group": "forex_major", "base": "GBP", "quote": "USD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+    "USDJPY": {"name": "US Dollar vs Japanese Yen", "group": "forex_major", "base": "USD", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "max_volume_lots": 200, "verified": true},
+    "USDCHF": {"name": "US Dollar vs Swiss Franc", "group": "forex_major", "base": "USD", "quote": "CHF", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+    "USDCAD": {"name": "US Dollar vs Canadian Dollar", "group": "forex_major", "base": "USD", "quote": "CAD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+    "AUDUSD": {"name": "Australian Dollar vs US Dollar", "group": "forex_major", "base": "AUD", "quote": "USD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+    "NZDUSD": {"name": "New Zealand Dollar vs US Dollar", "group": "forex_major", "base": "NZD", "quote": "USD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+
+    "EURGBP": {"name": "Euro vs British Pound", "group": "forex_cross", "base": "EUR", "quote": "GBP", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "max_volume_lots": 200, "verified": true},
+    "EURJPY": {"name": "Euro vs Japanese Yen", "group": "forex_cross", "base": "EUR", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "max_volume_lots": 200, "verified": true},
+    "GBPJPY": {"name": "British Pound vs Japanese Yen", "group": "forex_cross", "base": "GBP", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "max_volume_lots": 100, "verified": true},
+    "AUDJPY": {"name": "Australian Dollar vs Japanese Yen", "group": "forex_cross", "base": "AUD", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "max_volume_lots": 100, "verified": true},
+    "NZDJPY": {"name": "New Zealand Dollar vs Japanese Yen", "group": "forex_cross", "base": "NZD", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "max_volume_lots": 100, "verified": true},
+    "CADJPY": {"name": "Canadian Dollar vs Japanese Yen", "group": "forex_cross", "base": "CAD", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "verified": true},
+    "CHFJPY": {"name": "Swiss Franc vs Japanese Yen", "group": "forex_cross", "base": "CHF", "quote": "JPY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.01, "digits": 3, "verified": true},
+    "EURAUD": {"name": "Euro vs Australian Dollar", "group": "forex_cross", "base": "EUR", "quote": "AUD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "EURCHF": {"name": "Euro vs Swiss Franc", "group": "forex_cross", "base": "EUR", "quote": "CHF", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "EURCAD": {"name": "Euro vs Canadian Dollar", "group": "forex_cross", "base": "EUR", "quote": "CAD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "GBPAUD": {"name": "British Pound vs Australian Dollar", "group": "forex_cross", "base": "GBP", "quote": "AUD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "GBPCHF": {"name": "British Pound vs Swiss Franc", "group": "forex_cross", "base": "GBP", "quote": "CHF", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "AUDNZD": {"name": "Australian Dollar vs New Zealand Dollar", "group": "forex_cross", "base": "AUD", "quote": "NZD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "AUDCAD": {"name": "Australian Dollar vs Canadian Dollar", "group": "forex_cross", "base": "AUD", "quote": "CAD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "NZDCAD": {"name": "New Zealand Dollar vs Canadian Dollar", "group": "forex_cross", "base": "NZD", "quote": "CAD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+    "GBPNZD": {"name": "British Pound vs New Zealand Dollar", "group": "forex_cross", "base": "GBP", "quote": "NZD", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": true},
+
+    "USDMXN": {"name": "US Dollar vs Mexican Peso", "group": "forex_exotic", "base": "USD", "quote": "MXN", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": false, "note": "Wide spreads, thin liquidity, swap-heavy. Confirm pip size and digits in MT5 before sizing."},
+    "USDZAR": {"name": "US Dollar vs South African Rand", "group": "forex_exotic", "base": "USD", "quote": "ZAR", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": false, "note": "Confirm pip size and digits in MT5 before sizing."},
+    "USDTRY": {"name": "US Dollar vs Turkish Lira", "group": "forex_exotic", "base": "USD", "quote": "TRY", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": false, "note": "Very high inflation / high swap. Not suitable for a beginner account."},
+    "USDCNH": {"name": "US Dollar vs Offshore Chinese Yuan", "group": "forex_exotic", "base": "USD", "quote": "CNH", "contract_size": 100000, "quoted_units": "base_currency", "pip_size": 0.0001, "digits": 5, "verified": false, "note": "Confirm pip size and digits in MT5 before sizing."},
+
+    "XAUUSD": {"name": "Gold vs US Dollar", "group": "metal", "base": "XAU", "quote": "USD", "contract_size": 100, "quoted_units": "troy_ounces", "pip_size": 0.01, "digits": 3, "max_volume_lots": 200, "verified": true, "note": "1 lot = 100 troy ounces. A 0.01 price move = 1.00 USD per lot. Gold is typically 1.5-3x more volatile in pip terms than EURUSD, so a 'normal looking' gold stop in pips is NOT the same risk as the same number of pips on EURUSD. Size from stop distance, never from habit."},
+    "XAGUSD": {"name": "Silver vs US Dollar", "group": "metal", "base": "XAG", "quote": "USD", "contract_size": 5000, "quoted_units": "troy_ounces", "pip_size": 0.01, "digits": 3, "verified": true},
+    "XPTUSD": {"name": "Platinum vs US Dollar", "group": "metal", "base": "XPT", "quote": "USD", "contract_size": 100, "quoted_units": "troy_ounces", "pip_size": 0.1, "digits": 2, "verified": true},
+
+    "USOIL": {"name": "WTI Crude Oil", "group": "energy", "base": "USOIL", "quote": "USD", "contract_size": 1000, "quoted_units": "barrels", "pip_size": 0.01, "digits": 3, "verified": true},
+    "UKOIL": {"name": "Brent Crude Oil", "group": "energy", "base": "UKOIL", "quote": "USD", "contract_size": 1000, "quoted_units": "barrels", "pip_size": 0.01, "digits": 3, "verified": true},
+    "XNGUSD": {"name": "Natural Gas", "group": "energy", "base": "XNGUSD", "quote": "USD", "contract_size": 10000, "quoted_units": "MMBtu", "pip_size": 0.001, "digits": 4, "verified": false, "note": "Exness documentation shows 0.01 in the commodities article and 0.001 in the pip-size table. Verify in MT5 > Specification > Digits/Tick size. This ambiguity is exactly why you never size a trade from memory."},
+
+    "DXY": {"name": "US Dollar Index", "group": "index", "base": "USD", "quote": "USD", "contract_size": 1000, "quoted_units": "contracts", "pip_size": 0.01, "digits": 3, "max_volume_lots": 20, "verified": true},
+    "US500": {"name": "S&P 500 Index CFD", "group": "index", "base": "US500", "quote": "USD", "contract_size": 1, "quoted_units": "contracts", "pip_size": 0.1, "digits": 2, "verified": true},
+    "US30": {"name": "Dow Jones 30 Index CFD", "group": "index", "base": "US30", "quote": "USD", "contract_size": 1, "quoted_units": "contracts", "pip_size": 1, "digits": 1, "verified": true},
+    "USTEC": {"name": "Nasdaq 100 Index CFD", "group": "index", "base": "USTEC", "quote": "USD", "contract_size": 1, "quoted_units": "contracts", "pip_size": 0.1, "digits": 2, "verified": true},
+    "DE30": {"name": "DAX 40 Index CFD", "group": "index", "base": "DE30", "quote": "EUR", "contract_size": 1, "quoted_units": "contracts", "pip_size": 1, "digits": 1, "verified": true},
+    "UK100": {"name": "FTSE 100 Index CFD", "group": "index", "base": "UK100", "quote": "GBP", "contract_size": 1, "quoted_units": "contracts", "pip_size": 0.1, "digits": 2, "verified": true},
+    "JP225": {"name": "Nikkei 225 Index CFD", "group": "index", "base": "JP225", "quote": "JPY", "contract_size": 1, "quoted_units": "contracts", "pip_size": 1, "digits": 1, "verified": true},
+
+    "BTCUSD": {"name": "Bitcoin vs US Dollar", "group": "crypto", "base": "BTC", "quote": "USD", "contract_size": 1, "quoted_units": "coins", "pip_size": 0.1, "digits": 2, "verified": true, "note": "Extreme volatility and weekend risk. Not part of the beginner curriculum."},
+    "ETHUSD": {"name": "Ethereum vs US Dollar", "group": "crypto", "base": "ETH", "quote": "USD", "contract_size": 1, "quoted_units": "coins", "pip_size": 0.1, "digits": 2, "verified": true, "note": "Extreme volatility and weekend risk. Not part of the beginner curriculum."}
+  },
+
+  "trading_hours_note": {
+    "forex": "Sunday 22:00 UTC (approx.) to Friday 22:00 UTC, continuous. Session logic lives in forex_mastery/core/sessions.py.",
+    "metals": "Similar to forex but with a daily break; confirm current hours with Exness.",
+    "indices_stocks": "Cash-session dependent, with breaks, holidays and different margin requirements. Never trade an instrument whose hours you have not verified.",
+    "triple_swap": "Wednesday is normally triple-swap day for most instruments; Exness documents Thursday as triple-swap day for USDCAD. Holding a position over the rollover can materially change the cost of a trade."
+  }
+}

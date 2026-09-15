@@ -1,0 +1,111 @@
+{
+  "_meta": {
+    "purpose": "The conservative risk framework for a USD 250 learning account. Every number here is a HOUSE RULE chosen to maximise survival and learning, not returns.",
+    "philosophy": "Capital preservation and decision-making quality first, profitability second. A 250 USD account cannot be made 'safe' - at 0.25% risk a single loss is 0.63 USD. That is the point: the account exists to buy experience, and the experience must be cheap enough that one bad week does not end the project.",
+    "version": "1.0.0",
+    "reviewed_on": "2026-09-15"
+  },
+  "account": {
+    "starting_capital_usd": 250.0,
+    "account_currency": "USD",
+    "broker": "Exness",
+    "recommended_account_types": [
+      "Standard Cent",
+      "Standard"
+    ],
+    "account_type_note": "Standard Cent (suffix -c) quotes the same instruments in cents, so a 0.01 lot is 1/100th of a standard micro lot. For a 250 USD account it permits position sizes that a Standard account's 0.01-lot minimum cannot express. Verify the type is available in your registered region and that its spreads are acceptable before choosing it.",
+    "is_practice_capital": true,
+    "never_treat_as": "risk capital you can afford to lose quickly, income, or a compounding project"
+  },
+  "risk_limits": {
+    "risk_per_trade_percent": {
+      "phase_1_education_and_backtest": 0.0,
+      "phase_2_demo_execution_weeks_1_4": 0.1,
+      "phase_3_demo_consistent_weeks_5_12": 0.25,
+      "phase_4_small_live_evaluation": 0.25,
+      "absolute_hard_cap_percent": 1.0
+    },
+    "max_daily_loss_percent": 1.0,
+    "max_weekly_loss_percent": 3.0,
+    "max_portfolio_heat_percent": 2.0,
+    "max_correlated_positions": 1,
+    "max_trades_per_day": 2,
+    "max_open_positions": 1,
+    "min_reward_risk": 1.5,
+    "stop_trading_after_consecutive_losses": 3,
+    "cooldown_hours_after_consecutive_losses": 24,
+    "leverage_house_rule": {
+      "recommended_account_leverage": "1:100 or lower",
+      "maximum_effective_leverage": 10,
+      "explanation": "Broker leverage changes only how much margin is frozen, not how much you can lose. The house rule caps EFFECTIVE leverage (notional / equity) at 10:1, which with a 1% risk budget and a sane stop is almost never binding. Setting broker leverage low is a useful physical constraint because it makes oversized mistakes impossible rather than merely discouraged.",
+      "why_1_to_100": "At 0.01 lots of EURUSD (about 1,100 USD notional) on 250 USD equity, 1:100 leverages the account barely and prevents accidental 1-lot fat-finger orders from being accepted."
+    }
+  },
+  "risk_scenario_examples": {
+    "_comment": "Illustrative compounding of consecutive losses, computed by forex_mastery.core.risk.drawdown_ladder. Losses compound on remaining equity, so counts are slightly higher than naive division.",
+    "usd_250_account": [
+      {
+        "risk_percent": 0.1,
+        "risk_usd": 0.25,
+        "losses_to_5pct_dd": 52,
+        "losses_to_10pct_dd": 106,
+        "losses_to_20pct_dd": 224,
+        "losses_to_50pct_dd": 693
+      },
+      {
+        "risk_percent": 0.25,
+        "risk_usd": 0.625,
+        "losses_to_5pct_dd": 21,
+        "losses_to_10pct_dd": 43,
+        "losses_to_20pct_dd": 90,
+        "losses_to_50pct_dd": 277
+      },
+      {
+        "risk_percent": 0.5,
+        "risk_usd": 1.25,
+        "losses_to_5pct_dd": 11,
+        "losses_to_10pct_dd": 22,
+        "losses_to_20pct_dd": 45,
+        "losses_to_50pct_dd": 139
+      },
+      {
+        "risk_percent": 1.0,
+        "risk_usd": 2.5,
+        "losses_to_5pct_dd": 6,
+        "losses_to_10pct_dd": 11,
+        "losses_to_20pct_dd": 23,
+        "losses_to_50pct_dd": 69
+      }
+    ],
+    "recovery_math": {
+      "_comment": "Gain required on the REMAINING equity to return to the previous peak. This asymmetry is the mathematical case for capital preservation.",
+      "5%": "5.3%",
+      "10%": "11.1%",
+      "20%": "25.0%",
+      "30%": "42.9%",
+      "50%": "100.0%",
+      "70%": "233.3%"
+    }
+  },
+  "minimum_lot_problem": {
+    "statement": "On a 250 USD account, 0.01 lots of EURUSD is worth about 0.10 USD per pip, so a 30-pip stop risks about 3.00 USD = 1.20% of equity.",
+    "consequence": "Risking 0.25% per trade is arithmetically impossible on a Standard account with that stop. The honest options are: (1) use a Standard Cent account, where 0.01 cent-lots are 1/100th the size; (2) use a wider stop only on instruments whose minimum lot has a smaller money value; (3) accept the larger percentage deliberately, having recalculated the loss count to a 10% drawdown; or (4) stay on demo until the capital is large enough.",
+    "never_do": "Never 'fix' this by widening the stop arbitrarily or by trading without a stop."
+  },
+  "prohibited": [
+    "martingale or any doubling-after-a-loss scheme",
+    "grid systems used as a recovery mechanism",
+    "averaging down into a losing position without a predefined total risk",
+    "removing or widening a stop loss once the trade is live",
+    "trading more than the maximum number of positions",
+    "holding a position through a major release 'to see what happens'",
+    "increasing risk after a losing streak",
+    "trading any instrument you have not backtested or studied",
+    "using broker leverage above the house limit to squeeze in a larger position"
+  ],
+  "review_cadence": {
+    "daily": "Record every trade, check rule compliance, note emotional state.",
+    "weekly": "Recompute statistics, count rule violations, review screenshots.",
+    "monthly": "Evaluate whether the sample supports the strategy; only then consider adjusting a limit - and only in writing, never during a drawdown."
+  }
+}

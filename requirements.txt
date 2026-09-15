@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------------------
+# Forex Mastery System - dependencies
+# ---------------------------------------------------------------------------
+# DESIGN RULE: the `forex_mastery.core` package is PURE STANDARD LIBRARY.
+# Every financial calculation (pips, position sizing, risk, margin, metrics,
+# risk-of-ruin) runs on a bare Python 3.10+ install with no third-party
+# packages at all. The dependencies below are OPTIONAL extras that only add
+# convenience layers (dataframes, charts, Excel export, PDF export).
+# Install with:  pip install -r requirements.txt
+# ---------------------------------------------------------------------------
+
+# --- Optional: analytics / visualisation / exports -------------------------
+pandas>=2.0          # tabular analytics + CSV/Excel I/O helpers
+numpy>=1.24          # numerical arrays for simulations/charts
+matplotlib>=3.7      # equity curve, drawdown, distribution charts
+openpyxl>=3.1        # .xlsx read for journal import
+XlsxWriter>=3.1      # rich .xlsx generation (the master workbook)
+reportlab>=4.0       # PDF handbook + performance report generation
+scipy>=1.11          # optional statistical tests (t-test, bootstrap CI)
+
+# --- Optional: market data (free/lawful sources only) ----------------------
+yfinance>=0.2.40     # free proxy data for FX/indices/gold practice only
+requests>=2.31       # only for documented, permitted public APIs
+
+# --- Optional: notebook curriculum ----------------------------------------
+jupyterlab>=4.0
+nbformat>=5.9
+ipykernel>=6.29
+
+# --- Development ----------------------------------------------------------
+pytest>=8.0          # unit tests for every financial formula
+pytest-cov>=5.0
+ruff>=0.5            # linting

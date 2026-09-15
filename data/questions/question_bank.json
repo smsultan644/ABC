@@ -1,0 +1,846 @@
+{
+  "_meta": {
+    "purpose": "The question bank for the Forex Mastery System. Answers are stored with each question but are NOT shown during a test unless you ask for them (--show-answers).",
+    "format": {
+      "id": "unique id, CATEGORY-NNN",
+      "category": "beginner | market_mechanics | technical_analysis | fundamental_analysis | risk_management | psychology | strategy | statistics | backtesting | professional_decision_making",
+      "difficulty": "1 = recall, 2 = understanding, 3 = application, 4 = professional judgement",
+      "type": "mcq | true_false | numeric | scenario",
+      "question": "the prompt",
+      "options": "list (mcq, true_false, scenario)",
+      "answer": "index for mcq/true_false/scenario, or the number for numeric",
+      "tolerance": "allowed absolute error for numeric answers",
+      "explanation": "why the answer is right, and why the tempting wrong answers are wrong"
+    },
+    "scoring_note": "A quiz score is a weak signal. It measures recall under no pressure, while trading is decision-making under uncertainty and loss. Treat quiz performance as a prerequisite, never as proof of competence."
+  },
+  "questions": [
+    {
+      "id": "BEGINNER-001",
+      "category": "beginner",
+      "difficulty": 1,
+      "type": "mcq",
+      "question": "In the quote EUR/USD = 1.1000, which currency is the base currency and what does the number mean?",
+      "options": [
+        "Base is USD; 1.1000 USD buys 1 EUR",
+        "Base is EUR; 1 EUR costs 1.1000 USD",
+        "Base is EUR; 1 USD buys 1.1000 EUR",
+        "There is no base currency in a floating rate"
+      ],
+      "answer": 1,
+      "explanation": "The base currency (first in the pair) is what you are buying or selling, in units of one. The quote currency (second) is what you pay with. So 1 EUR costs 1.1000 USD."
+    },
+    {
+      "id": "BEGINNER-002",
+      "category": "beginner",
+      "difficulty": 1,
+      "type": "numeric",
+      "question": "EURUSD moves from 1.1000 to 1.1050. How many pips is that move?",
+      "answer": 50,
+      "tolerance": 0.01,
+      "explanation": "One pip on a non-JPY pair is 0.0001. 0.0050 / 0.0001 = 50 pips. (The fifth decimal is a pipette or point, worth 1/10 of a pip.)"
+    },
+    {
+      "id": "BEGINNER-003",
+      "category": "beginner",
+      "difficulty": 2,
+      "type": "numeric",
+      "question": "You buy 0.10 lots of EURUSD on a USD account. What is one pip worth in USD?",
+      "answer": 1.0,
+      "tolerance": 0.001,
+      "explanation": "Pip value = lots x contract size x pip size = 0.10 x 100,000 x 0.0001 = 1.00 USD. A standard lot would be 10 USD per pip."
+    },
+    {
+      "id": "BEGINNER-004",
+      "category": "beginner",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: trading with higher leverage automatically increases how much money you lose per pip.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False - and this misconception ruins accounts. Leverage changes the margin the broker freezes, not the money value of a pip. Your loss per pip is set by lot size. Higher leverage only makes it easier to hold a bigger position (and harder to be forced out), which is why it is dangerous in the hands of a trader who sizes by habit rather than by risk."
+    },
+    {
+      "id": "BEGINNER-005",
+      "category": "beginner",
+      "difficulty": 2,
+      "type": "numeric",
+      "question": "USDJPY is quoted at 150.00. You hold 1.00 lot (100,000 USD) on a USD account. What is one pip worth in USD? (Answer to 2 decimal places.)",
+      "answer": 6.67,
+      "tolerance": 0.05,
+      "explanation": "One pip on a JPY pair is 0.01. 100,000 x 0.01 = 1,000 JPY. To convert JPY to USD, divide by the USDJPY rate: 1,000 / 150 = 6.67 USD. Note the pip value changes as the rate changes."
+    },
+    {
+      "id": "BEGINNER-006",
+      "category": "beginner",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "Your account is in USD and you are looking at XAUUSD (gold), where 1 lot = 100 troy ounces and the pip size is 0.01. What is one pip worth per 1.00 lot?",
+      "options": [
+        "10.00 USD",
+        "1.00 USD",
+        "0.01 USD",
+        "100.00 USD"
+      ],
+      "answer": 1,
+      "explanation": "Pip value = 100 oz x 0.01 = 1.00 USD per lot. Gold's small pip value is why gold stops look enormous in pips: a 200-pip (2.00 USD) gold stop on 0.10 lots risks 20 USD, whereas 200 pips on EURUSD at 0.10 lots risks 200 USD. Compare risk in money, never in pips."
+    },
+    {
+      "id": "MECHANICS-001",
+      "category": "market_mechanics",
+      "difficulty": 1,
+      "type": "mcq",
+      "question": "You click BUY on EURUSD at a market price of 1.0998 bid / 1.1000 ask. Which price do you get, and what happens to your position value immediately afterwards?",
+      "options": [
+        "Bid 1.0998; you are 2 pips up immediately",
+        "Ask 1.1000; you are immediately 2 pips down (the cost of closing at the bid)",
+        "The mid price 1.0999; no immediate effect",
+        "Whatever price the broker chooses after execution"
+      ],
+      "answer": 1,
+      "explanation": "You buy at the ask and can only sell back at the bid, so the spread is an immediate, unavoidable cost. Marking a new position as 'down' is not a broker trick - it is arithmetic."
+    },
+    {
+      "id": "MECHANICS-002",
+      "category": "market_mechanics",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "Why is the FX market described as decentralised (OTC) rather than exchange-traded?",
+      "options": [
+        "Because it trades 24 hours a day",
+        "Because there is no single central exchange; trades occur between counterparties through a network of banks, brokers and liquidity providers",
+        "Because currencies are not real assets",
+        "Because retail traders are the main participants"
+      ],
+      "answer": 1,
+      "explanation": "There is no single order book for EURUSD. Pricing emerges from competing quotes across a network of participants. That has real consequences: no consolidated tape (so 'real' volume is unavailable), and your broker's price is *its* price, not 'the' price."
+    },
+    {
+      "id": "MECHANICS-003",
+      "category": "market_mechanics",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: your MetaTrader volume indicator shows the true traded volume of the FX market.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. MT4/MT5 volume for FX is *tick volume* - the number of price updates during the bar, which is a proxy for activity from your broker's feed only. It is not centralised volume, because no such figure exists in an OTC market. Tick volume correlates loosely with real activity, which is why it can be a mild confirmation tool but never a decisive one."
+    },
+    {
+      "id": "MECHANICS-004",
+      "category": "market_mechanics",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "You buy 0.10 lots of EURUSD at 1.1000 with a 20-pip stop and a 40-pip target. Ignoring costs, what is your planned reward:risk ratio?",
+      "answer": 2.0,
+      "tolerance": 0.01,
+      "explanation": "40 pips of reward / 20 pips of risk = 2.0. The break-even win rate at 1:2 is 1/(1+2) = 33.3%, before costs."
+    },
+    {
+      "id": "MECHANICS-005",
+      "category": "market_mechanics",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "The US Non-Farm Payrolls release is due in two minutes. Spread on EURUSD is normally 1.0 pip and is now 4.5 pips. You have a valid setup. What is the professional action, and why?",
+      "options": [
+        "Enter now - volatility means opportunity",
+        "Enter with double size to capture the move",
+        "Do not enter; wait for at least 15 minutes after the release for spreads to normalise and evaluate then",
+        "Remove the stop loss so you cannot be stopped out by the spike"
+      ],
+      "answer": 2,
+      "explanation": "A 4.5-pip spread quadruples your entry cost, and news spikes routinely produce slippage that makes your actual fill far from the intended price. Options 1 and 2 gamble on an event whose outcome distribution you cannot control; option 4 is the classic account-killer (a position without a stop can lose the entire account). Waiting is not caution - it is cheaper execution and a cleaner decision."
+    },
+    {
+      "id": "MECHANICS-006",
+      "category": "market_mechanics",
+      "difficulty": 2,
+      "type": "scenario",
+      "question": "You hold an overnight EURUSD long. On Wednesday you notice a triple swap charge. What are you actually paying for?",
+      "options": [
+        "A broker commission for holding positions during the week",
+        "The interest differential between the two currencies, charged for the three days the market is closed at the weekend",
+        "A penalty for exceeding leverage",
+        "Nothing real - swaps are a broker invention with no economic basis"
+      ],
+      "answer": 1,
+      "explanation": "Swap reflects the interest-rate differential between the two currencies in the pair, adjusted by the broker's markup, and Wednesday (or Thursday for USDCAD at Exness) carries the triple charge to cover the weekend rollover. It is a real cost that accumulates on positions held for days or weeks - which is why swing-trading short-term high-swap pairs is expensive."
+    },
+    {
+      "id": "TECH-001",
+      "category": "technical_analysis",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "Which statement about candlestick patterns is correct?",
+      "options": [
+        "A hammer at a swing low is a reliable buy signal on its own",
+        "A candlestick pattern is a description of price behaviour that must be evaluated at a meaningful location",
+        "The more patterns you can name, the better your trading will be",
+        "Patterns work better on 1-minute charts because there are more of them"
+      ],
+      "answer": 1,
+      "explanation": "A candle summarises open, high, low and close, so it describes how price behaved in a period. Its meaning depends entirely on where it occurs. The same hammer at the top of a 200-pip rally and after a news spike means something different from one at a tested weekly support level."
+    },
+    {
+      "id": "TECH-002",
+      "category": "technical_analysis",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "An uptrend is best described as:",
+      "options": [
+        "Price above a moving average",
+        "A sequence of higher swing highs and higher swing lows",
+        "A series of green candles",
+        "RSI above 50"
+      ],
+      "answer": 1,
+      "explanation": "Market structure - higher highs with higher lows - is the definition. Indicators are derived from price, so they lag the structure. 'Price above a moving average' is a filter, not a definition, and can be true in a range."
+    },
+    {
+      "id": "TECH-003",
+      "category": "technical_analysis",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "EURUSD has rallied 180 pips in four hours. Your setup is a support-resistance reversion trade and you would be shorting into this move. The higher timeframe trend is up. What is the highest-quality decision?",
+      "options": [
+        "Short now - the move is overextended",
+        "Short with double size because the reversion must come",
+        "Do not take it: the setup's required context (exhaustion at a level) is absent, and you would be counter-trend without confirmation",
+        "Short and remove the stop so you can wait for the reversion"
+      ],
+      "answer": 2,
+      "explanation": "Mean-reversion setups need evidence of exhaustion at a level - a rejection, a failed breakout, a structural break - not merely a big move. Trading counter-trend without that evidence is a low-quality decision regardless of outcome. Removing the stop converts a bad trade into an unbounded one."
+    },
+    {
+      "id": "TECH-004",
+      "category": "technical_analysis",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "You use a 20-period EMA on the H1 chart. Price closes 60 pips above it. Using an ATR(14) of 25 pips on H1, approximately how many ATRs away from the EMA is price? (2 decimal places.)",
+      "answer": 2.4,
+      "tolerance": 0.05,
+      "explanation": "60 / 25 = 2.4 ATR. Normalising distance by volatility is the difference between '60 pips' (meaningless on its own) and '2.4 ATR' (an extension that is unusual for this instrument's current conditions)."
+    },
+    {
+      "id": "TECH-005",
+      "category": "technical_analysis",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "Your backtest of a 'liquidity sweep and reversal' setup (buy after price sweeps a prior low and closes back above it) shows a 48% win rate at 1.6R over 300 trades. A friend says the concept is invalid because 'nothing in the order book is observable from a retail chart'. What is the most accurate assessment?",
+      "options": [
+        "Your friend is right: because order flow is unobservable, the result must be luck",
+        "Your friend is right, and you should adopt their indicator instead",
+        "The pattern is an observable, testable description of price behaviour; the *mechanism* (institutional stop hunting) is an interpretation. Test the rule, be sceptical of the story",
+        "The 48% win rate proves the institutional mechanism is real"
+      ],
+      "answer": 2,
+      "explanation": "This is the correct professional stance. A sequence of price events can be defined precisely and tested. The narrative attached to it is separate and usually unverifiable. Edges can exist without the popular story being true - and a story being appealing is not evidence."
+    },
+    {
+      "id": "TECH-006",
+      "category": "technical_analysis",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: adding more indicators to a chart increases the reliability of your analysis.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. Most indicators are transformations of the same price series, so they are redundant and correlated. Four trend indicators agreeing is one piece of information counted four times. Worse, with ten filters a signal almost never fires, and a trader who needs a signal tends to relax the filters until it does."
+    },
+    {
+      "id": "FUND-001",
+      "category": "fundamental_analysis",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "A central bank signals it is likely to raise interest rates faster than the market expected. All else equal, what is the most likely short-term effect on that currency?",
+      "options": [
+        "Currency weakens, because higher rates slow the economy",
+        "Currency strengthens, because higher expected yields attract capital",
+        "No effect, because rates are already priced in",
+        "Currency weakens, because higher rates mean higher inflation"
+      ],
+      "answer": 1,
+      "explanation": "Higher expected yields attract capital into that currency, so it typically strengthens. The important phrase is 'all else equal' and 'faster than expected': markets price expectations, so a hike that was fully anticipated moves nothing. The change in expectations, not the level, is what matters."
+    },
+    {
+      "id": "FUND-002",
+      "category": "fundamental_analysis",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "Which best describes the difference between fiscal and monetary policy?",
+      "options": [
+        "Fiscal policy is set by central banks, monetary policy by governments",
+        "Monetary policy concerns interest rates and money supply (central bank); fiscal policy concerns government taxation and spending",
+        "They are the same thing described differently",
+        "Fiscal policy only matters for bonds, monetary policy only for FX"
+      ],
+      "answer": 1,
+      "explanation": "Central banks set policy rates and manage liquidity; governments tax and spend. Both influence currencies, but through different channels and timescales."
+    },
+    {
+      "id": "FUND-003",
+      "category": "fundamental_analysis",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "US CPI comes in hotter than forecast. US 2-year Treasury yields jump 12 basis points. Which set of FX reactions is most consistent with standard macro logic?",
+      "options": [
+        "USD strengthens broadly; gold falls; USDJPY rises",
+        "USD weakens broadly; gold rises; USDJPY falls",
+        "USD strengthens; gold rises; USDJPY falls",
+        "There is no predictable relationship"
+      ],
+      "answer": 0,
+      "explanation": "Hotter inflation raises the expected policy rate path, which lifts short-term yields and the dollar; higher real yields raise the opportunity cost of holding non-yielding gold, so gold typically falls; USDJPY tends to rise with US yields. Note 'typically': these relationships are tendencies, they invert in risk-off regimes, and they are exactly the kind of claim you should verify yourself rather than accept."
+    },
+    {
+      "id": "FUND-004",
+      "category": "fundamental_analysis",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "The market is 'risk-off' after a geopolitical shock. Which is the most likely combination?",
+      "options": [
+        "AUD weak, JPY strong, gold strong",
+        "AUD strong, JPY weak, gold weak",
+        "AUD weak, JPY weak, gold strong",
+        "All pairs unchanged because FX does not react to geopolitics"
+      ],
+      "answer": 0,
+      "explanation": "In risk-off flows capital moves toward perceived havens (USD, JPY, CHF, gold) and away from growth- and commodity-linked currencies (AUD, NZD, CAD). Note that the yen is a haven despite Japan's low yields, because of the structure of carry trades - a reminder that macro relationships are regime-dependent, not laws."
+    },
+    {
+      "id": "FUND-005",
+      "category": "fundamental_analysis",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: an FX pair rises because more traders clicked buy than sell on your broker's platform.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. Every FX transaction has a buyer and a seller in equal size; retail flow is a small fraction of the market. Price moves because the *clearing price* changes - the level at which the marginal buyer and marginal seller are willing to transact. Thinking in terms of pressure at the clearing price is far more accurate than thinking in clicks."
+    },
+    {
+      "id": "FUND-006",
+      "category": "fundamental_analysis",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You read that 'the Fed is hawkish, so buy USD'. What is the most professional response?",
+      "options": [
+        "Buy USD immediately before the move completes",
+        "Check what is already priced in, what the market's rate expectations are, and whether the hawkishness is new information",
+        "Ignore it and trade your technical setup",
+        "Buy USD but with double size because the signal is fundamental"
+      ],
+      "answer": 1,
+      "explanation": "What moves price is the gap between expectation and reality, and the market's own pricing of that path. 'Hawkish' relative to yesterday may already be fully discounted; hawkish relative to what was priced is what repriced the market. The professional step is to find out which one you are looking at - usually by comparing market-implied rate expectations before and after, not by reading commentary."
+    },
+    {
+      "id": "RISK-001",
+      "category": "risk_management",
+      "difficulty": 2,
+      "type": "numeric",
+      "question": "You have a 250 USD account. You risk 0.25% per trade. How much is that in USD? (2 decimals.)",
+      "answer": 0.63,
+      "tolerance": 0.01,
+      "explanation": "250 x 0.0025 = 0.625 USD, about 0.63. This is the entire point of starting small: each loss costs less than a coffee, which makes it psychologically possible to follow the process while learning."
+    },
+    {
+      "id": "RISK-002",
+      "category": "risk_management",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "Account equity 1,000 USD. Risk 1%. EURUSD, entry 1.1000, stop 1.0980 (20 pips). What lot size should you trade? (0.01 lot precision.)",
+      "answer": 0.05,
+      "tolerance": 0.001,
+      "explanation": "Risk = 10.00 USD. Risk per 1.00 lot = 20 pips x 10 USD = 200 USD. Lots = 10 / 200 = 0.05. The order is always: money risk -> stop distance -> size."
+    },
+    {
+      "id": "RISK-003",
+      "category": "risk_management",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "With compounding, roughly how many consecutive 1% losses produce a 10% drawdown? (Whole number.)",
+      "answer": 11,
+      "tolerance": 0,
+      "explanation": "0.99^11 = 0.8953, so 11 losses take you past -10%. Naive division (10 / 1) says 10; compounding is slightly worse because each loss is smaller in absolute terms. This is why professionals use the formula, not the shortcut."
+    },
+    {
+      "id": "RISK-004",
+      "category": "risk_management",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "After a 50% drawdown, what return do you need on the remaining equity to get back to your previous peak?",
+      "options": [
+        "50%",
+        "75%",
+        "100%",
+        "150%"
+      ],
+      "answer": 2,
+      "explanation": "0.5 x (1 + 1.0) = 1.0, so a 100% gain is required. This asymmetry - the denominator shrinks with the drawdown - is the mathematical core of capital preservation. Note that the risk of further loss is unchanged after the drawdown, so the difficulty compounds."
+    },
+    {
+      "id": "RISK-005",
+      "category": "risk_management",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "A strategy wins 40% of the time with an average winner of 2.5R and an average loser of exactly 1R. What is the expectancy in R per trade? (2 decimals.)",
+      "answer": 0.4,
+      "tolerance": 0.01,
+      "explanation": "E = 0.40 x 2.5 - 0.60 x 1.0 = 1.0 - 0.6 = +0.40R per trade. A 40% win rate is entirely workable with 2.5R winners - win rate alone says almost nothing about a strategy."
+    },
+    {
+      "id": "RISK-006",
+      "category": "professional_decision_making",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You are down 3% for the week, which is your written weekly loss limit. A setup you consider A-grade appears. What do you do?",
+      "options": [
+        "Take it - A-grade setups should override limits",
+        "Take it with half size to be safe",
+        "Stop for the week, log the setup in the journal, and review it Monday",
+        "Increase size to recover the weekly loss"
+      ],
+      "answer": 2,
+      "explanation": "The limit exists specifically for the moment when you most want to override it. Option 2 is a rationalisation - half size still breaks the rule, and the rule was designed knowing that good-looking setups appear after losses. Option 4 is martingale in disguise and the most common cause of rapid account destruction. Logging the setup lets you measure whether it would have won, without paying for the answer.",
+      "tags": [
+        "discipline",
+        "weekly limit",
+        "decision"
+      ]
+    },
+    {
+      "id": "RISK-007",
+      "category": "risk_management",
+      "difficulty": 3,
+      "type": "true_false",
+      "question": "True or false: if you have three longs in EURUSD, GBPUSD and XAUUSD, your risk is diversified because you hold three different instruments.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. All three typically weaken when the dollar strengthens, so you hold one bet expression three times. If they are each 0.25% risk, your true exposure is about 0.75% to a single factor. Diversification requires *different drivers*, not different tickers."
+    },
+    {
+      "id": "PSY-001",
+      "category": "psychology",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "Loss aversion in trading means:",
+      "options": [
+        "Traders avoid risk entirely",
+        "The pain of a loss is felt more strongly than the pleasure of an equal gain, which pushes traders to hold losers and cut winners early",
+        "Losing money is objectively worse than winning the same amount",
+        "Traders should never take losses"
+      ],
+      "answer": 1,
+      "explanation": "Loss aversion explains the two most destructive behaviours in retail trading: refusing to accept a small loss (holding and hoping) and closing winners too early (locking in relief). A written exit plan is the counter-measure, because it moves the decision out of the moment."
+    },
+    {
+      "id": "PSY-002",
+      "category": "psychology",
+      "difficulty": 2,
+      "type": "scenario",
+      "question": "You lose two trades in a row. Your next setup appears. Which reaction indicates a process problem rather than bad luck?",
+      "options": [
+        "Taking the same setup at the same risk because the plan says so",
+        "Taking the setup at double size 'because it must work now'",
+        "Skipping it because you feel uncertain, and noting that in the journal",
+        "Reviewing the chart again to confirm the setup is still valid"
+      ],
+      "answer": 1,
+      "explanation": "Increasing size after losses is martingale reasoning and it converts a normal losing streak into an account-ending event. Option 3 is a documented, honest deviation - not ideal, but recoverable and measurable. Option 1 is the professional default."
+    },
+    {
+      "id": "PSY-003",
+      "category": "psychology",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "Which is the clearest evidence of outcome bias in a trading journal review?",
+      "options": [
+        "Marking a losing trade as 'good decision, bad outcome'",
+        "Marking a rule-breaking trade as acceptable because it made money",
+        "Recording the emotional state during each trade",
+        "Comparing your expectancy to the backtest"
+      ],
+      "answer": 1,
+      "explanation": "Judging decisions by their outcomes is exactly how bad habits get reinforced. A profitable rule violation must be recorded as a violation - otherwise your data teaches you to repeat it, and it will eventually be expensive. Grade the decision and the outcome separately."
+    },
+    {
+      "id": "PSY-004",
+      "category": "psychology",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "After a big winner you feel invincible and notice you are taking setups you would normally reject. What is the most reliable counter-measure?",
+      "options": [
+        "Increase risk while 'the streak is hot'",
+        "Enforce a fixed post-win cool-down and re-run the rule engine on any new setup before entry",
+        "Stop trading forever",
+        "Take a larger position to make the most of the momentum"
+      ],
+      "answer": 1,
+      "explanation": "Euphoria degrades decision quality the same way frustration does, and it is more dangerous because it feels good and is not flagged as a problem. A mechanical checklist and a mandatory cool-down remove the decision from the emotional state - which is the whole reason processes exist."
+    },
+    {
+      "id": "PSY-005",
+      "category": "psychology",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: a trader who feels fear before every trade should look for a method without fear.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. Some apprehension is appropriate because real risk exists. The goal is not fearlessness but decoupling: the decision is made by the plan, and the emotion is noticed and recorded. Fear becomes a problem when it changes position size, exit timing, or whether a written setup is taken at all."
+    },
+    {
+      "id": "PSY-006",
+      "category": "psychology",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You notice that your worst trades consistently happen on days you check charts at lunchtime on your phone, between work tasks. What is the correct diagnosis?",
+      "options": [
+        "You need a better indicator for phone charts",
+        "Your strategy does not work on lower timeframes",
+        "The environment and context is producing low-quality, reactive decisions; the fix is a structural rule about when and where you trade",
+        "You should trade more often to build experience"
+      ],
+      "answer": 2,
+      "explanation": "This is an environment/context failure, not a market-analysis failure. The professional fix is a written constraint ('no trading outside the planned session, on desktop only, with the routine completed'), which removes the opportunity to make a reactive decision. Trading psychology is mostly about design, not willpower."
+    },
+    {
+      "id": "STRAT-001",
+      "category": "strategy",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "Which market condition is a trend-following strategy most likely to lose in?",
+      "options": [
+        "A persistent directional move",
+        "A range with frequent false breakouts",
+        "A market with rising volatility",
+        "A market with rising volume"
+      ],
+      "answer": 1,
+      "explanation": "Trend systems buy strength and sell weakness, so in a range they systematically buy highs and sell lows. This is why 'which strategy is best?' is the wrong question - the right one is 'which condition does this strategy require, and is that condition present?'"
+    },
+    {
+      "id": "STRAT-002",
+      "category": "strategy",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "Your breakout strategy has a 30% win rate and 3.5R average winners, positive expectancy over 200 trades. You suffer five consecutive losses. What is the correct action?",
+      "options": [
+        "Abandon the strategy - the edge is gone",
+        "Double the risk to recover faster",
+        "Check the five trades against the rules; if they all followed the plan, continue unchanged and expect this again (the maths of a 30% win rate guarantees streaks)",
+        "Switch to a mean-reversion strategy because breakouts are failing"
+      ],
+      "answer": 2,
+      "explanation": "At a 30% win rate, a five-loss run is close to routine: the probability of at least one such run in 100 trades is high. Deviating on the basis of five trades is the classic way a genuinely profitable strategy is abandoned before it pays. Verify rule compliance first; if the trades were valid, do nothing."
+    },
+    {
+      "id": "STRAT-003",
+      "category": "strategy",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "A pullback strategy is different from a breakout strategy mainly because:",
+      "options": [
+        "It only works on higher timeframes",
+        "It waits for a better price within an established move, accepting that some moves will continue without it",
+        "It has a higher win rate by definition",
+        "It requires no stop loss"
+      ],
+      "answer": 1,
+      "explanation": "Pullback entries trade better prices and typically tighter stops, at the cost of missing moves that never retrace. That trade-off - not superiority - is the point. No strategy family dominates on all metrics simultaneously."
+    },
+    {
+      "id": "STRAT-004",
+      "category": "strategy",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You want to add a new setup to your plan. What is the correct sequence?",
+      "options": [
+        "Trade it live with small size and see what happens",
+        "Write the rules, backtest >=100 trades, run an out-of-sample test, then demo forward-test it",
+        "Ask other traders whether it works",
+        "Combine it with your existing setup to increase trade frequency"
+      ],
+      "answer": 1,
+      "explanation": "This is the seven-stage validation process. Trading it live first means paying tuition with real money for information you could have obtained for free. Note also that adding setups increases trade frequency, which increases costs and can degrade the existing edge."
+    },
+    {
+      "id": "STRAT-005",
+      "category": "strategy",
+      "difficulty": 3,
+      "type": "true_false",
+      "question": "True or false: a strategy with a 90% win rate is usually better than one with a 40% win rate.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. Win rate without payoff is meaningless. A 90% win-rate system with 0.1R winners and 3R losers has clearly negative expectancy - and is the shape of many account-destroying 'grid' or 'martingale' systems. Expectancy = p x W - (1-p) x L is the only number that answers the question."
+    },
+    {
+      "id": "STRAT-006",
+      "category": "strategy",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "You have identified a valid setup but the nearest logical stop is 120 pips away, and the setup's usual target of 2R would require a 240-pip move that is implausible in the session. What is the correct action?",
+      "options": [
+        "Take the trade anyway; the R:R is mathematically fine",
+        "Use a tighter stop at an arbitrary round number so the maths works",
+        "Decline the trade: the stop is defined by structure and the target by available room; if they conflict, there is no tradable edge here",
+        "Trade it without a target and hope"
+      ],
+      "answer": 2,
+      "explanation": "Levels come first; size and R:R are consequences. Moving the stop to make the numbers look better destroys the trade's logic and guarantees you get stopped out by normal noise (the wrong place for a stop). Declining is a positive, professional act - and it belongs in the journal with the reason."
+    },
+    {
+      "id": "STATS-001",
+      "category": "statistics",
+      "difficulty": 2,
+      "type": "numeric",
+      "question": "A strategy wins 60% of the time with 1R average winners and 1R average losers. What is the expectancy in R per trade? (2 decimals.)",
+      "answer": 0.2,
+      "tolerance": 0.01,
+      "explanation": "0.60 x 1 - 0.40 x 1 = +0.20R per trade. Note that this is the same expectancy as a 40% win rate with 2R winners - expectancy is what matters, not win rate."
+    },
+    {
+      "id": "STATS-002",
+      "category": "statistics",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "You have 12 trades with a positive average R. What is the most defensible conclusion?",
+      "options": [
+        "The strategy has a proven edge",
+        "The strategy is probably profitable going forward",
+        "The result is compatible with pure chance and provides almost no evidence either way",
+        "The strategy should be scaled up before the edge decays"
+      ],
+      "answer": 2,
+      "explanation": "With 12 observations, the standard error of the mean R is around 0.3R for typical dispersion - wide enough that a strongly negative expectancy can still produce a positive 12-trade sample. Sample size is not a formality; it is the entire basis for concluding anything."
+    },
+    {
+      "id": "STATS-003",
+      "category": "statistics",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "At a 45% win rate, what is the approximate probability (as a percentage) of seeing at least one run of 6 consecutive losses in 100 trades? (Nearest whole percent; the toolkit computes this exactly.)",
+      "answer": 73,
+      "tolerance": 3,
+      "explanation": "Approximately 73%. This is the number to keep in mind when six losses in a row feels like the strategy has broken: with 100 trades it is more likely than not. Knowing this in advance is what allows you to do nothing."
+    },
+    {
+      "id": "STATS-004",
+      "category": "statistics",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "Why is a Sharpe-like ratio computed from 30 trades unreliable?",
+      "options": [
+        "Because Sharpe ratios only apply to stocks",
+        "Because the estimate has a large standard error, and trading returns are not normally distributed",
+        "Because it ignores win rate",
+        "Because it requires daily returns"
+      ],
+      "answer": 1,
+      "explanation": "The standard error of a Sharpe estimate is roughly sqrt((1+S^2/2)/n), so with n=30 it is around 0.18 - enormous relative to the values traders argue about. Additionally, R-multiple distributions are skewed with fat tails, violating the normality the classic formula assumes."
+    },
+    {
+      "id": "STATS-005",
+      "category": "statistics",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: a profit factor of 1.05 means the strategy is clearly good.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. A profit factor of 1.05 means gross profit is only 5% larger than gross loss - well inside the range achievable by chance, and easily erased by spread, commission, slippage or a single data error. It is a *possible* edge, not a demonstrated one."
+    },
+    {
+      "id": "STATS-006",
+      "category": "statistics",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You test 20 different strategy variations on the same history. One shows a striking profit factor of 2.1. What is the most likely explanation?",
+      "options": [
+        "You have found a genuine edge after thorough research",
+        "Multiple testing: with 20 attempts, something will look excellent by chance alone",
+        "The data is wrong",
+        "Profit factor of 2.1 is impossible"
+      ],
+      "answer": 1,
+      "explanation": "This is data snooping (multiple testing). Testing many hypotheses on one dataset guarantees impressive-looking survivors. The antidotes are: pre-register the hypothesis, reserve a held-out period you never look at, and require the effect to survive out-of-sample."
+    },
+    {
+      "id": "BACKTEST-001",
+      "category": "backtesting",
+      "difficulty": 2,
+      "type": "mcq",
+      "question": "What is look-ahead bias in a backtest?",
+      "options": [
+        "Using data from the future, or information not yet available, when making a simulated decision",
+        "Testing on data that is too old",
+        "Assuming the future will resemble the past",
+        "Only testing winning trades"
+      ],
+      "answer": 0,
+      "explanation": "Look-ahead bias is the most common fatal flaw in amateur backtests: entering at a candle's open using the knowledge that its close was bullish, or using a level that was only identified later. The test must reproduce the information available at the decision moment."
+    },
+    {
+      "id": "BACKTEST-002",
+      "category": "backtesting",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "Your manual backtest on EURUSD H4 shows excellent results. The spread on your chosen period was assumed to be zero. What is the honest assessment?",
+      "options": [
+        "Fine, because spread is small",
+        "The result is overstated; a 1.2-pip spread against a 40-pip stop is about 3% of risk per round trip, and much larger in fast markets",
+        "Spread should be ignored because the demo account has tight spreads",
+        "Add 10% to the profits to account for it"
+      ],
+      "answer": 1,
+      "explanation": "Costs must be modelled explicitly, because they are paid on every trade and scale inversely with the size of your stop. On short stops, costs can consume an entire edge. The correct treatment is to subtract spread and commission from each simulated trade, never to 'adjust the result afterwards'."
+    },
+    {
+      "id": "BACKTEST-003",
+      "category": "backtesting",
+      "difficulty": 3,
+      "type": "mcq",
+      "question": "You tune your strategy parameters until the backtest looks best. What has most likely happened?",
+      "options": [
+        "The strategy has been optimised and is now better",
+        "The parameters have been fitted to noise (curve fitting) and will probably not hold up",
+        "Nothing - parameters always need tuning",
+        "The out-of-sample results will be even better"
+      ],
+      "answer": 1,
+      "explanation": "Curve fitting produces a strategy that explains the past perfectly and the future poorly. The defence is a large out-of-sample period, walk-forward analysis, and parameter stability checks - if small changes to a parameter destroy the results, the edge was in the noise."
+    },
+    {
+      "id": "BACKTEST-004",
+      "category": "backtesting",
+      "difficulty": 3,
+      "type": "numeric",
+      "question": "You want at least 100 samples for a setup that occurs on average 2.5 times per month. How many months of history do you need to review? (Whole number.)",
+      "answer": 40,
+      "tolerance": 0.1,
+      "explanation": "100 / 2.5 = 40 months - more than three years. This is why traders either test the setup on multiple instruments (and accept the correlation between them) or accept a smaller sample with much wider error bars. There is no third option that involves real evidence."
+    },
+    {
+      "id": "BACKTEST-005",
+      "category": "backtesting",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "Your in-sample expectancy is +0.35R and your out-of-sample expectancy is -0.05R over 40 trades. Which interpretation is most professional?",
+      "options": [
+        "The strategy works; the out-of-sample period was different by chance",
+        "The strategy is unproven at best and likely fitted; do not trade it, and investigate what changed",
+        "The out-of-sample sample is too small to matter, so use the in-sample figure",
+        "Average the two and use +0.15R"
+      ],
+      "answer": 1,
+      "explanation": "The out-of-sample result is the honest estimate - that is precisely why it exists. Averaging it with the in-sample result reintroduces the fitted information. The correct action is to keep the strategy in development, not to trade it while hoping the difference was chance."
+    },
+    {
+      "id": "BACKTEST-006",
+      "category": "backtesting",
+      "difficulty": 2,
+      "type": "true_false",
+      "question": "True or false: if a strategy worked in a backtest, it will work in a demo forward test at the same rate.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "False. Forward testing differs because: you now make discretionary decisions in real time, execution differs (spread, slippage, partial fills), the market regime may have changed, and psychological pressure alters behaviour. Expect degradation, and treat a small degradation as normal while a large one indicates a flawed backtest."
+    },
+    {
+      "id": "DECISION-001",
+      "category": "professional_decision_making",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "EURUSD H4 is in a clean uptrend (higher highs and higher lows). Price has pulled back to a prior H4 demand zone and printed a bullish engulfing candle, but the daily chart is in a downtrend. London session, no news for 4 hours, spread 1.1 pips. What is the most professional reading?",
+      "options": [
+        "Ignore the daily; H4 gives a clear long",
+        "Take the long with reduced size to acknowledge the conflict",
+        "Recognise a timeframe conflict: the pattern is valid on H4 but it is a counter-trend trade against the daily, so either skip it or treat it as a lower-quality counter-trend setup with a tighter target",
+        "Wait for a daily bullish candle, then buy"
+      ],
+      "answer": 2,
+      "explanation": "Timeframe conflict does not invalidate the pattern, but it changes its classification and therefore its management. The professional response names the conflict explicitly, downgrades the setup's quality grade, and adjusts expectations - rather than pretending it is not there or taking it at full size. The invalidation level (below the demand zone) is unchanged; the *expected outcome distribution* is not."
+    },
+    {
+      "id": "DECISION-002",
+      "category": "professional_decision_making",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You are 1 hour from the end of your session, flat, and one of your watchlist instruments has just formed your written setup with a 1.4R target available before a major level. Your plan requires at least 1.5R. What do you do, and what is the reasoning?",
+      "options": [
+        "Take it - 1.4R is close enough to 1.5R",
+        "Take it with a tighter stop to turn 1.4R into 1.5R",
+        "Decline it and record why; the minimum exists to exclude targets that do not clear costs and the noise of the level",
+        "Take it and hope the level breaks"
+      ],
+      "answer": 2,
+      "explanation": "Small deviations from written thresholds are how plans erode - each one is individually defensible, and the aggregate is a different (untested) system. Option 2 is worse than it looks: tightening a structural stop moves it into noise, so you increase the probability of losing while appearing to improve the maths. Recording the declined setup lets you check later whether the rule is too strict - using data rather than frustration."
+    },
+    {
+      "id": "DECISION-003",
+      "category": "professional_decision_making",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "Your written plan trades London only. At 20:00 UTC you see a textbook setup on the New York close. Your journal shows your New York trades are -0.31R average over 22 trades. What is the correct action?",
+      "options": [
+        "Take it; a good setup is a good setup",
+        "Take it at half size",
+        "Do not take it - this is exactly the situation your plan and your data already answered",
+        "Take it and add New York to the plan afterwards"
+      ],
+      "answer": 2,
+      "explanation": "The plan says no, and the data says why: the edge you have measured lives in the London window. Adding New York because a setup looks good is changing the rules in response to a single observation - the most common way traders invalidate their own sample. If it is genuinely promising, test it properly (backtest + forward test) and add it in writing at a scheduled review."
+    },
+    {
+      "id": "DECISION-004",
+      "category": "professional_decision_making",
+      "difficulty": 3,
+      "type": "scenario",
+      "question": "A trade is 1R in profit. Your plan says move the stop to break-even at 1R and take half off at 2R. Price stalls at 1.2R and you feel a strong urge to close it now to 'protect' the profit. What is the professional response?",
+      "options": [
+        "Close it - protecting profit is prudent",
+        "Follow the plan: the break-even stop means the trade can no longer lose, and closing early truncates the winners that pay for the losses",
+        "Move the stop to +0.5R to lock in a small gain",
+        "Add to the position to accelerate the move"
+      ],
+      "answer": 1,
+      "explanation": "With the stop already at break-even, this trade's outcome is free to run - an asymmetric position that the plan deliberately created. Closing early converts a positive-expectancy design into a low-R, high-stress activity, and if done consistently it removes the very winners your expectancy calculation depends on. The urge itself is worth recording; the action is not worth taking."
+    },
+    {
+      "id": "DECISION-005",
+      "category": "professional_decision_making",
+      "difficulty": 4,
+      "type": "scenario",
+      "question": "You cannot tell whether the market is trending or ranging. Your two setups require opposite conditions. Risk would be 0.25%. What is the correct decision?",
+      "options": [
+        "Take the setup with the higher historical expectancy",
+        "Take both - one will be right",
+        "No trade: an unclear regime means the precondition for both setups is absent",
+        "Take a smaller position to hedge the uncertainty"
+      ],
+      "answer": 2,
+      "explanation": "This is the no-trade system working as intended. 'Unclear' is not a gap in your analysis to be filled by bravado; it is information. Sitting out costs nothing but opportunity, and it protects the far more valuable asset: the ability to take the setup when conditions are unambiguous. The best traders decline far more than they take."
+    }
+  ]
+}

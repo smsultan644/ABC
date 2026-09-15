@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generated artefacts - regenerate any time with `python main.py build all`,
+# `python main.py report`, or `python main.py build notebooks`
+/outputs/
+/data/raw/
+/data/questions/*.tmp
+
+# Personal trading data is never committed: your journal is yours, and it stays
+# on your machine. Keep the template so a fresh clone can start immediately.
+/data/journal/*.csv
+!/data/journal/journal_template.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

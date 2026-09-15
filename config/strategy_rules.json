@@ -1,0 +1,179 @@
+{
+  "_meta": {
+    "purpose": "The trading rule set evaluated by forex_mastery.core.rule_engine. Edit this file, not the Python, to change your plan.",
+    "severity_guide": "block = the engine returns NO TRADE. warn = the engine returns APPROVED WITH WARNINGS and records why. Missing data on a 'block' rule is treated as a FAILURE (unverified is not approved).",
+    "phase_guide": {
+      "phase_1_chart_reading": "Only run the engine with informational rules enabled. You are not trading yet.",
+      "phase_2_demo_execution": "Tighten to the settings below and never relax them mid-week.",
+      "phase_3_live_small": "Keep these rules; change limits only at a scheduled monthly review, never during a drawdown."
+    },
+    "version": "1.0.0",
+    "last_reviewed": "2026-09-15"
+  },
+
+  "rules": [
+    {
+      "type": "max_risk",
+      "code": "risk_max",
+      "description": "Risk per trade must not exceed 1.00% of equity (0.25% during the first 90 days of demo work).",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_percent": 1.0 }
+    },
+    {
+      "type": "min_rr",
+      "code": "rr_min",
+      "description": "Planned reward:risk must be at least 1.5:1; anything below relies on a high win rate to survive.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "min_rr": 1.5 }
+    },
+    {
+      "type": "instrument_allowed",
+      "code": "instrument_allowed",
+      "description": "Trade only the majors you have actually studied and backtested.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "allowed": ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", "USDCHF", "NZDUSD", "XAUUSD"] }
+    },
+    {
+      "type": "session_allowed",
+      "code": "session_allowed",
+      "description": "Trade only in the liquid windows you tested: London, New York, and their overlap.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "allowed": ["London", "New York", "London/New York overlap"] }
+    },
+    {
+      "type": "news_blackout",
+      "code": "news_blackout",
+      "description": "No new position within 30 minutes before or 15 minutes after a high-impact release; no new positions on major central-bank days.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "minutes_before": 30, "minutes_after": 15, "block_central_bank_days": true }
+    },
+    {
+      "type": "max_spread",
+      "code": "spread_max",
+      "description": "Skip the trade if the spread is wider than normal for the instrument - a wide spread silently doubles your cost.",
+      "severity": "warn",
+      "enabled": true,
+      "params": {
+        "max_spread_pips": 2.0,
+        "max_spread_pips_by_symbol": { "XAUUSD": 0.45, "GBPJPY": 3.0, "USDCAD": 2.5, "USDJPY": 1.5 }
+      }
+    },
+    {
+      "type": "volatility_band",
+      "code": "volatility_band",
+      "description": "Trade only when ATR is inside a normal band: too quiet means no follow-through, too violent means stops are unreliable.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "min_atr_pips": 3.0, "max_atr_pips": 250.0 }
+    },
+    {
+      "type": "max_trades_day",
+      "code": "max_trades_day",
+      "description": "Maximum two trades per day. Overtrading is the most common self-inflicted loss source.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_trades_per_day": 2 }
+    },
+    {
+      "type": "daily_loss_limit",
+      "code": "daily_loss_limit",
+      "description": "Stop for the day after losing 1% of equity. The day is over; the market will still be there tomorrow.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_daily_loss_percent": 1.0 }
+    },
+    {
+      "type": "weekly_loss_limit",
+      "code": "weekly_loss_limit",
+      "description": "Stop for the week after losing 3%. A weekly circuit-breaker prevents a bad week becoming a bad account.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_weekly_loss_percent": 3.0 }
+    },
+    {
+      "type": "cooldown",
+      "code": "cooldown",
+      "description": "After three consecutive losses, stop for 24 hours and re-read the journal before taking the next setup.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_consecutive_losses": 3 }
+    },
+    {
+      "type": "correlation",
+      "code": "correlation",
+      "description": "At most one position per currency story. Long EURUSD + long GBPUSD + short USDCHF is one USD trade, not three.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_correlated_positions": 1 }
+    },
+    {
+      "type": "portfolio_heat",
+      "code": "portfolio_heat",
+      "description": "Total simultaneous risk must stay at or below 2% while learning.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "max_portfolio_heat_percent": 2.0 }
+    },
+    {
+      "type": "htf_alignment",
+      "code": "htf_alignment",
+      "description": "Counter-trend entries are only allowed when the higher timeframe is explicitly ranging.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "allow_range_setups": true }
+    },
+    {
+      "type": "setup_complete",
+      "code": "setup_complete",
+      "description": "Structure must be readable, the level identified, the trigger defined and the invalidation price written down BEFORE entry.",
+      "severity": "block",
+      "enabled": true,
+      "params": {}
+    },
+    {
+      "type": "in_plan",
+      "code": "in_plan",
+      "description": "Only setups named in the written trading plan may be taken.",
+      "severity": "block",
+      "enabled": true,
+      "params": {
+        "allowed_setups": [
+          "trend_pullback",
+          "breakout_retest",
+          "range_edge_rejection",
+          "failed_breakout_reversal",
+          "htf_level_reaction"
+        ]
+      }
+    },
+    {
+      "type": "psychology",
+      "code": "psychology",
+      "description": "No entry when frustrated, euphoric, bored or revenge-driven; no entry on poor sleep.",
+      "severity": "block",
+      "enabled": true,
+      "params": { "blocked_states": ["frustrated", "euphoric", "bored", "angry", "revenge", "impatient"], "require_sleep": true }
+    },
+    {
+      "type": "checklist",
+      "code": "checklist",
+      "description": "The pre-trade checklist must be complete. Incomplete checklists are how 'almost a setup' becomes a loss.",
+      "severity": "block",
+      "enabled": true,
+      "params": {}
+    },
+    {
+      "type": "screenshot",
+      "code": "screenshot",
+      "description": "Screenshot before entry, so the review can see what you saw.",
+      "severity": "warn",
+      "enabled": true,
+      "params": {}
+    }
+  ]
+}

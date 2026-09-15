@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forex-mastery"
+version = "0.1.0"
+description = "Evidence-based Forex education, risk management, analytics and journaling toolkit (Exness / MT5 / MT4)."
+requires-python = ">=3.10"
+dependencies = []          # core is standard-library only, by design
+
+[project.optional-dependencies]
+analytics = ["pandas>=2.0", "numpy>=1.24", "matplotlib>=3.7"]
+excel     = ["XlsxWriter>=3.1", "openpyxl>=3.1"]
+pdf       = ["reportlab>=4.0"]
+stats     = ["scipy>=1.11"]
+dev       = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+forex-mastery = "forex_mastery.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["forex_mastery*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
