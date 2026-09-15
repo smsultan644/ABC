@@ -23,6 +23,7 @@ account (**USD 250**) after a long demo phase.
 | **Reports** | Markdown → PDF / DOCX handbooks, 20-sheet Excel workbook, charts, CSV breakdowns | `forex_mastery/reports/` |
 | **Training programme** | 90-day / 13-week / 10-phase demo programme with gates, mastery scorecard, readiness criteria | `forex_mastery/program/` |
 | **Quiz bank** | 60+ questions across 10 categories, answers hidden until you commit | `data/questions/`, `forex_mastery/quiz/` |
+| **Broker conditions** | account types, margin call / stop-out levels, higher-margin-requirement windows, trading-volume definition (dated, sourced) | `config/broker.json`, `forex_mastery/core/broker.py` |
 | **CLI** | every tool as one command | `main.py` |
 
 ## 2. Install and first run
@@ -42,6 +43,7 @@ pip install -r requirements.txt    # pandas, matplotlib, XlsxWriter, reportlab, 
 ```bash
 python main.py --help                       # every command
 python main.py specs --symbol XAUUSD        # instrument specification + notes
+python main.py broker --hmr                 # account types, stop-out levels, HMR windows
 python main.py pip --symbol USDJPY --price USDJPY=150.0
 python main.py position --symbol EURUSD --balance 250 --risk 0.25 \
     --entry 1.1000 --stop 1.0950 --take-profit 1.1100 --leverage 100
@@ -93,7 +95,7 @@ broker's current contract specification overrides anything stored here.
 ## 5. Layout
 
 ```
-config/          instruments, strategy rules, risk profile
+config/          instruments, broker conditions, strategy rules, risk profile
 data/            journal CSVs (git-ignored), question bank
 docs/            00_MASTER_ROADMAP.md, 01_CURRICULUM.md, lessons/, handbooks/
 forex_mastery/   core/ journal/ analytics/ reports/ program/ quiz/ cli.py

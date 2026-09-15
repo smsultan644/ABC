@@ -1,0 +1,156 @@
+{
+  "_meta": {
+    "purpose": "Broker-level trading conditions that are NOT instrument specifications: account types, margin call and stop-out levels, higher-margin-requirement windows, and how trading volume is defined.",
+    "why_this_file_exists": "Account conditions decide what happens when a trade goes wrong (stop-out level), what your costs look like (spread vs commission), and when the platform demands more margin (HMR). None of that is visible in a pip-value calculation, and all of it can end an account.",
+    "verified_on": "2026-09-15",
+    "verification_policy": "Every value marked \"verified\": true was read from the official Exness Help Center on verified_on. Values marked \"verified\": false are marked UNVERIFIED and must be confirmed in the Personal Area or the trading terminal. Broker conditions are region- and account-specific: minimum initial deposit is explicitly region based in the official documentation, so no single figure is valid for everyone.",
+    "sources": [
+      "https://get.exness.help/hc/en-us/articles/360013782240-Trading-account-types (account types, minimum deposit, spreads, commissions)",
+      "https://get.exness.help/hc/en-us/articles/4408633634322-How-to-create-trading-accounts (account creation steps, demo availability, unchangeable account type/server)",
+      "https://get.exness.help/hc/en-us/articles/360014693340-Margin-call-and-stop-out-levels-by-account-type (margin call / stop out by account type)",
+      "https://get.exness.help/hc/en-us/articles/8633865683612-Why-is-the-margin-required-so-high-for-my-order (higher margin requirements before weekends and news)",
+      "https://get.exness.help/hc/en-us/articles/9662707664156-Trading-volume-calculation (trading volume = lots x contract size, in base currency)",
+      "https://get.exness.help/hc/en-us/articles/18043874767772-Trading-calculator (broker calculator: margin, spread cost, commission, swaps, pip value)",
+      "https://get.exness.help/hc/en-us/articles/360014693340 (margin call/stop-out; entity exceptions)"
+    ],
+    "important_warning": "These conditions change. Re-read the official sources before every new phase of trading, and treat anything in this file as a dated snapshot rather than a current guarantee.",
+    "not_advice": "This file records documented broker conditions. It is not a recommendation to open, fund or trade any account."
+  },
+
+  "environment": "demo_first",
+  "environment_note": "The project's programme requires a long demo phase before any live capital. 250 USD is the eventual live figure, and only after the readiness criteria pass.",
+
+  "account_types": [
+    {
+      "key": "standard_cent",
+      "name": "Standard Cent",
+      "tier": "standard",
+      "minimum_initial_deposit": "none stated",
+      "minimum_initial_deposit_verified": true,
+      "spread_from_pips": 0.3,
+      "commission": "none",
+      "commission_verified": true,
+      "margin_call_percent": 60.0,
+      "stop_out_percent": 0.0,
+      "notes": "Documented account suffix is -c. Demo accounts are NOT available for Standard Cent, so you cannot rehearse the exact cent-lot maths in a demo first. Cent lots are why this account matters on a very small live balance: 0.01 cent-lots are roughly 1/100th the money value of 0.01 standard lots, which is the honest workaround for the minimum-lot problem.",
+      "verified": true
+    },
+    {
+      "key": "standard",
+      "name": "Standard",
+      "tier": "standard",
+      "minimum_initial_deposit": "none stated",
+      "minimum_initial_deposit_verified": true,
+      "spread_from_pips": 0.2,
+      "commission": "none",
+      "commission_verified": true,
+      "margin_call_percent": 60.0,
+      "stop_out_percent": 0.0,
+      "notes": "Documented instruments: forex, metals, cryptocurrencies, commodities (metals and energies), stocks, indices. Cost is inside the spread. Documented maximum volume 200 lots during 07:00-20:59 GMT and 60 lots during 21:00-06:59 GMT.",
+      "verified": true
+    },
+    {
+      "key": "pro",
+      "name": "Pro",
+      "tier": "professional",
+      "minimum_initial_deposit": "yes, region based",
+      "minimum_initial_deposit_verified": true,
+      "spread_from_pips": 0.1,
+      "commission": "none",
+      "commission_verified": true,
+      "margin_call_percent": 30.0,
+      "stop_out_percent": 0.0,
+      "notes": "Execution type is chosen only for Pro accounts at creation. Higher margin call level (30%) than Standard: the warning arrives later, which is not a benefit.",
+      "verified": true
+    },
+    {
+      "key": "raw_spread",
+      "name": "Raw Spread",
+      "tier": "professional",
+      "minimum_initial_deposit": "yes, region based",
+      "minimum_initial_deposit_verified": true,
+      "spread_from_pips": 0.0,
+      "commission": "up to 3.50 USD each side per lot",
+      "commission_verified": true,
+      "margin_call_percent": 30.0,
+      "stop_out_percent": 0.0,
+      "notes": "Cost is split: near-zero spread plus commission. On 0.01 lots the commission is about 0.07 USD round turn. Cost per trade must be computed, not assumed: a tighter spread is not automatically cheaper at very small size.",
+      "verified": true
+    },
+    {
+      "key": "zero",
+      "name": "Zero",
+      "tier": "professional",
+      "minimum_initial_deposit": "yes, region based",
+      "minimum_initial_deposit_verified": true,
+      "spread_from_pips": 0.0,
+      "commission": "from 0.02 USD each side per lot",
+      "commission_verified": true,
+      "margin_call_percent": 30.0,
+      "stop_out_percent": 0.0,
+      "notes": "Lowest documented commission per side. Still has costs, and still has a minimum lot.",
+      "verified": true
+    }
+  ],
+
+  "stop_out_exceptions": {
+    "stocks_under_market_risk": "For stocks, the stop-out level may rise to 100% under increased market risk.",
+    "entity_specific": "A stop out of 20% applies for clients registered via Exness (KE) Limited and Exness Limited Jordan Ltd.",
+    "verified": true,
+    "consequence": "Never assume the documented 0% applies to your account. Confirm the margin call and stop-out levels for YOUR entity and account type before trading, because the difference between 0% and 20% decides whether a single position can empty the account."
+  },
+
+  "zero_stop_out_explanation": "A 0% stop out means positions may only be closed when the margin level reaches 0%, i.e. when equity is essentially exhausted. It is not a protective feature for the trader: it shifts the responsibility for stopping out onto your own stop loss and your own size decision.",
+
+  "higher_margin_requirements": {
+    "summary": "Exness documents that margin requirements increase before volatile events, in periods it calls Higher Margin Requirements (HMR).",
+    "weekend_window": {
+      "quote": "For most instruments, from 3 hours before a weekend close until 1 hour after the market reopens, margin is calculated using the instrument's maximum leverage.",
+      "crypto_exception": "Cryptocurrencies trade 24/7, so weekend HMR does not apply to them.",
+      "interpretation": "Interpretation, not a quote: margin can be several times larger than usual in this window, so a position that fits comfortably on Friday morning may not fit on Friday evening. For a small account the practical rule is simpler: do not carry positions through the weekend while learning."
+    },
+    "news_window": {
+      "quote": "For most instruments, positions opened 15 minutes before a news release until 90 seconds after are limited to the instrument's maximum leverage during HMR.",
+      "existing_positions": "Existing positions remain unaffected, except for stocks, where previously opened orders may also be recalculated during financial report announcements.",
+      "interpretation": "Interpretation: the leverage used for margin is capped during this window, which can raise the margin a new order needs at exactly the moment spreads widen. The system's news blackout (no entry 30 minutes before / 15 minutes after) keeps you out of the window entirely."
+    },
+    "duration_caveat": "The HMR period depends on the instrument and the event, and may last longer based on risk management decisions.",
+    "how_to_know": "An HMR banner appears on charts in the Exness Terminal and Exness Trade, and the New Order window always shows the leverage that will be used for margin calculation.",
+    "verified": true
+  },
+
+  "trading_volume": {
+    "definition": "Trading volume is always calculated in the base currency.",
+    "formula": "TV = number of lots x contract size",
+    "examples": [
+      "3 lots EURUSD -> 3 x 100,000 EUR = 300,000 EUR",
+      "3 lots UKOIL -> 3 x 1,000 BBL = 3,000 BBL"
+    ],
+    "why_it_matters": "TV is what margin and pip value are derived from. It is not the same as your risk: TV describes the size of the position, risk describes the distance to invalidation priced in money.",
+    "verified": true
+  },
+
+  "broker_calculator": {
+    "where": "Personal Area > Tools & Services, and in the Exness Trade app.",
+    "returns": ["Margin", "Spread cost", "Commission", "Swap short", "Swap long", "Pip value"],
+    "documented_caveats": [
+      "Spread cost is based on the average spread of the previous trading day; the actual spread cost can only be determined when a real order is opened.",
+      "Results depend on the account type, account currency, instrument, volume and leverage.",
+      "For instruments with fixed margin requirements, the leverage setting is disabled."
+    ],
+    "comparison_with_this_project": "The broker calculator is the authority on that broker's own conditions and should be used to sanity-check results. This project's engine differs on purpose in two ways: it refuses to run at all when a conversion rate is unknown (MissingRateError) instead of assuming a rate, and it reports the minimum-lot problem as a hard error instead of silently rounding a size up. Use both, and treat any disagreement as a finding to investigate.",
+    "verified": true
+  },
+
+  "risk_rules_for_this_project": {
+    "risk_per_trade_learning_percent": 0.25,
+    "risk_per_trade_hard_cap_percent": 1.0,
+    "max_trades_per_day": 2,
+    "daily_loss_limit_percent": 1.0,
+    "weekly_loss_limit_percent": 3.0,
+    "max_portfolio_heat_percent": 2.0,
+    "news_blackout_minutes_before": 30,
+    "news_blackout_minutes_after": 15,
+    "source": "config/strategy_rules.json and config/risk_profile.json - these are this project's rules, not broker rules."
+  }
+}

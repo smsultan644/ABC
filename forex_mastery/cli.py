@@ -752,6 +752,77 @@ def cmd_readiness(args: argparse.Namespace) -> int:
     return 0 if report["failed_hard"] == [] else 5
 
 
+
+def cmd_broker(args: argparse.Namespace) -> int:
+    """Show documented broker conditions: account types, stop-out levels, HMR."""
+    from .core.broker import (
+        broker_profile,
+        format_account_table,
+        format_hmr_summary,
+        stop_out_level,
+        verification_age_days,
+    )
+
+    profile = broker_profile()
+    print(format_account_table())
+
+    print()
+    if args.hmr or args.all:
+        print(format_hmr_summary())
+        print()
+
+    if args.account:
+        entry = _account_or_exit(args.account)
+        print(f"ACCOUNT TYPE: {entry.name}")
+        print(f"  minimum initial deposit : {entry.minimum_initial_deposit}")
+        print(f"  spread from             : "
+              f"{'n/a' if entry.spread_from_pips is None else f'{entry.spread_from_pips:g} pips'}")
+        print(f"  commission              : {entry.commission}")
+        print(f"  margin call             : "
+              f"{'?' if entry.margin_call_percent is None else f'{entry.margin_call_percent:g}%'}")
+        print(f"  stop out                : "
+              f"{'?' if entry.stop_out_percent is None else f'{entry.stop_out_percent:g}%'}")
+        print(f"  documented on           : {profile.verified_on}  "
+              f"(source: official Exness Help Center)")
+        print(f"  notes                   : {entry.notes}")
+        level = stop_out_level(entry.key)
+        if level == 0.0:
+            print()
+            print("  A document-free warning: a 0% stop out is not protection. On a single")
+            print("  position it means the broker may not close you until equity is essentially")
+            print("  gone. Your own stop loss and your own size are the only limits that act")
+            print("  before then.")
+        print()
+        print("  Confirm this in your own Personal Area before trading: conditions are")
+        print("  region- and entity-specific and can change.")
+
+    if args.check:
+        age = verification_age_days(args.check)
+        if age is None:
+            _warn("could not compare dates; pass an ISO date such as --check 2026-09-15")
+        else:
+            print(f"  age of these figures on {args.check}: {age} days")
+            if age > 90:
+                _warn("older than a quarter - re-read the official sources before relying on them")
+
+    print()
+    print("Reminder: this records documented BROKER conditions, not a recommendation to")
+    print("open, fund or trade any account. The 250 USD live step comes after the readiness")
+    print("criteria pass:  python main.py readiness --criteria")
+    return 0
+
+
+def _account_or_exit(key: str):
+    from .core.broker import account_type
+
+    try:
+        return account_type(key)
+    except Exception as exc:
+        _fail(str(exc))
+        raise SystemExit(1)
+
+
+
 def cmd_lesson(args: argparse.Namespace) -> int:
     """List or print the lesson documents in docs/lessons/."""
     lessons_dir = ROOT / "docs" / "lessons"
@@ -1104,6 +1175,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--criteria", action="store_true", help="list the criteria")
     p.add_argument("--set", action="append", help="criterion=yes|no, repeatable")
     p.set_defaults(func=cmd_readiness)
+
+    p = sub.add_parser("broker", help="documented broker conditions: account types, "
+                                      "stop-out levels, higher margin requirements")
+    p.add_argument("--account", default=None,
+                   help="detail one account type: standard_cent, standard, pro, raw_spread, zero")
+    p.add_argument("--hmr", action="store_true",
+                   help="also print the higher-margin-requirement windows (weekend and news)")
+    p.add_argument("--all", action="store_true", help="everything")
+    p.add_argument("--check", default=None, metavar="ISO_DATE",
+                   help="report how old the documented figures are on that date")
+    p.set_defaults(func=cmd_broker)
 
     p = sub.add_parser("lesson", help="list or print the lesson documents")
     p.add_argument("--number", type=int, default=None)
