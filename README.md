@@ -24,6 +24,7 @@ account (**USD 250**) after a long demo phase.
 | **Training programme** | 90-day / 13-week / 10-phase demo programme with gates, mastery scorecard, readiness criteria | `forex_mastery/program/` |
 | **Quiz bank** | 60+ questions across 10 categories, answers hidden until you commit | `data/questions/`, `forex_mastery/quiz/` |
 | **Broker conditions** | account types, margin call / stop-out levels, higher-margin-requirement windows, trading-volume definition (dated, sourced) | `config/broker.json`, `forex_mastery/core/broker.py` |
+| **Candle measurement** | 13 mechanical pattern definitions + forward statistics with baseline comparison and sample-size caveats (runs on data *you* supply) | `forex_mastery/core/candles.py` |
 | **CLI** | every tool as one command | `main.py` |
 
 ## 2. Install and first run
@@ -44,6 +45,8 @@ pip install -r requirements.txt    # pandas, matplotlib, XlsxWriter, reportlab, 
 python main.py --help                       # every command
 python main.py specs --symbol XAUUSD        # instrument specification + notes
 python main.py broker --hmr                 # account types, stop-out levels, HMR windows
+python main.py candles --rules              # objective candle-shape definitions
+python main.py candles --file data/raw/EURUSD_X_1d.csv --pattern bullish_pin  # honest stats
 python main.py pip --symbol USDJPY --price USDJPY=150.0
 python main.py position --symbol EURUSD --balance 250 --risk 0.25 \
     --entry 1.1000 --stop 1.0950 --take-profit 1.1100 --leverage 100

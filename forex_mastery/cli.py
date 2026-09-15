@@ -823,6 +823,69 @@ def _account_or_exit(key: str):
 
 
 
+
+def cmd_candles(args: argparse.Namespace) -> int:
+    """Measure candle-pattern behaviour on data YOU supply. Never fabricates data."""
+    from .core.candles import (
+        PATTERN_RULES,
+        analyse_pattern,
+        load_bars_csv,
+        pattern_description,
+    )
+
+    if args.rules:
+        print("=" * 78)
+        print("OBJECTIVE CANDLE PATTERN RULES")
+        print("=" * 78)
+        print(pattern_description("all"))
+        print("-" * 78)
+        print("  These are mechanical definitions, not opinions. A pattern is a shape in the")
+        print("  data; whether it has any predictive value is a separate question that only")
+        print("  measurement can answer - and the measurement is printed with its caveats.")
+        return 0
+
+    if not args.file:
+        _fail("--file is required (a CSV with open, high, low, close columns)")
+        print("  Obtain data you are permitted to use, for example free practice data:")
+        print("    python main.py market --symbols EURUSD=X --period 2y --interval 1d")
+        print("  then:  python main.py candles --file data/raw/EURUSD_X_1d.csv "
+              "--pattern bullish_pin --forward 20")
+        return 1
+
+    try:
+        bars = load_bars_csv(args.file, limit=args.limit)
+    except Exception as exc:
+        _fail(str(exc))
+        return 1
+
+    only_this = args.pattern or "all"
+    targets = list(PATTERN_RULES) if only_this == "all" else [only_this]
+    failures = 0
+    for name in targets:
+        try:
+            stats = analyse_pattern(
+                bars,
+                name,
+                forward=args.forward,
+                barrier=args.barrier,
+                direction_bias=args.bias,
+                min_samples=args.min_samples,
+            )
+        except Exception as exc:
+            _fail(f"{name}: {exc}")
+            failures += 1
+            continue
+        print(stats.report())
+        print()
+    if failures and failures == len(targets):
+        return 1
+    print("  Reminder: this measures what happened in YOUR sample, gross of costs, with")
+    print("  overlapping windows and a period you chose. It is a starting point for")
+    print("  honest testing, not a signal and not a promise.")
+    return 0
+
+
+
 def cmd_lesson(args: argparse.Namespace) -> int:
     """List or print the lesson documents in docs/lessons/."""
     lessons_dir = ROOT / "docs" / "lessons"
@@ -1175,6 +1238,21 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--criteria", action="store_true", help="list the criteria")
     p.add_argument("--set", action="append", help="criterion=yes|no, repeatable")
     p.set_defaults(func=cmd_readiness)
+
+    p = sub.add_parser("candles", help="measure candle-pattern behaviour on OHLC data you supply")
+    p.add_argument("--file", default=None, help="CSV with open, high, low, close columns")
+    p.add_argument("--pattern", default=None,
+                   help="one pattern name, or omit for all of them")
+    p.add_argument("--forward", type=int, default=20, help="bars to look ahead (default 20)")
+    p.add_argument("--barrier", type=float, default=1.0,
+                   help="R multiple for the favourable-before-adverse test (default 1.0)")
+    p.add_argument("--bias", default="candle", choices=["candle", "long", "short"],
+                   help="direction to measure: the candle's own, always long, or always short")
+    p.add_argument("--min-samples", type=int, default=1, dest="min_samples",
+                   help="refuse to report below this many occurrences")
+    p.add_argument("--limit", type=int, default=None, help="only load the first N bars")
+    p.add_argument("--rules", action="store_true", help="print the objective pattern rules")
+    p.set_defaults(func=cmd_candles)
 
     p = sub.add_parser("broker", help="documented broker conditions: account types, "
                                       "stop-out levels, higher margin requirements")
